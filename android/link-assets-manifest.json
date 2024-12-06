@@ -1,0 +1,13 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/InstrumentSans-Regular.ttf",
+      "sha1": "85a0b0c01deba8e116ef26bb181f121564b2f48b"
+    },
+    {
+      "path": "src/assets/images/waterbackground.png",
+      "sha1": "e9f403db9f149f5c1999409c666663bbf09a2e26"
+    }
+  ]
+}
