@@ -1,6 +1,14 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  SafeAreaView,
+  StatusBar,
+  Image,
+} from 'react-native';
 import React, {useEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
+import LinearGradient from 'react-native-linear-gradient';
 
 const SpashScreen = () => {
   const navigation = useNavigation();
@@ -16,18 +24,51 @@ const SpashScreen = () => {
   }, [navigation]);
 
   return (
-    <View
-      style={{
-        justifyContent: 'center',
-        alignContent: 'center',
-        alignSelf: 'center',
-        flex: 1,
-      }}>
-      <Text>SpashScreen</Text>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <StatusBar
+        translucent
+        backgroundColor="#FFFFFF"
+        barStyle="light-content"
+      />
+      <View style={styles.mainContainer}>
+        <Image
+          source={require('../assets/images/logo.png')}
+          style={styles.logo}
+        />
+        <Image
+          source={require('../assets/images/seafoodTextImage.png')}
+          style={styles.seafoodwalaTextImage}
+        />
+      </View>
+    </SafeAreaView>
   );
 };
 
 export default SpashScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#FFFFFF',
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+  },
+
+  mainContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignContent: 'center',
+    alignItems: 'center',
+  },
+
+  logo: {
+    width: 124,
+    height: 124,
+    resizeMode: 'cover',
+  },
+
+  seafoodwalaTextImage: {
+    width: 171,
+    height: 40,
+    marginTop: 10,
+  },
+});
