@@ -13,14 +13,13 @@ const Stack = createNativeStackNavigator();
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{headerShown: false}}>
+      <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='BottomTab'>
         <Stack.Screen name="Splash" component={SpashScreen} />
         <Stack.Screen name="OfferIntroScreen" component={OfferIntroScreen} />
         <Stack.Screen name="LiveCutting" component={LiveCuttingIntroScreen} />
         <Stack.Screen name="FastDelivery" component={FastDeliveryIntroScreen} />
         <Stack.Screen name="SelectCity" component={SelectCityScreen} />
         <Stack.Screen name="BottomTab" component={BottomTab} />
-        
       </Stack.Navigator>
     </NavigationContainer>
   );

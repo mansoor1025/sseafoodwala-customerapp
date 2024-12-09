@@ -7,31 +7,46 @@ import Fontisto from 'react-native-vector-icons/Fontisto';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AddToCartScreen from '../screens/AddToCartScreen';
 import PreviousOrderScreen from '../screens/PreviousOrderScreen';
+import CartIcon from '../assets/icons/cartIcon.svg';
+import PreviousOrder from '../assets/icons/previousOrderIcon.svg';
+import HomeIcon from '../assets/icons/HomeIcon.svg';
+import NotificationIcon from '../assets/icons/notificationIcon.svg';
+import UserSettingIcon from '../assets/icons/userSettingIcon.svg';
+import {Dimensions} from 'react-native';
+import Icon from '../components/Icons';
+
+const screenWidth = Dimensions.get('window').width;
+
 const Tab = createBottomTabNavigator();
 
-const BottomTab = () => {
+const BottomTab = ({route}) => {
   return (
     <Tab.Navigator
+      initialRouteName="Home"
       screenOptions={{
         tabBarActiveTintColor: '#FD8D1F',
         tabBarInactiveTintColor: '#BCBCBC',
         tabBarStyle: {
           backgroundColor: '#FFFFFF',
-          borderTopWidth: 0,
-          paddingBottom: 10,
+          borderTopWidth: 1, // Apply top border for Cart tab
+          borderBottomWidth: 1, // Apply bottom border for Cart tab
+          height: 56,
         },
         tabBarShowLabel: false,
+        headerShown: false,
       }}>
       <Tab.Screen
         name="Cart"
         component={AddToCartScreen}
         options={{
           tabBarIcon: ({focused, color, size}) => (
-            <Entypo
-              name="shopping-cart"
-              color={focused ? '#FD8D1F' : color}
-              size={30}
-            />
+            <View style={styles.iconStyles}>
+              <CartIcon
+                width={25}
+                height={22}
+                fill={focused ? '#FD8D1F' : color}
+              />
+            </View>
           ),
         }}
       />
@@ -41,11 +56,13 @@ const BottomTab = () => {
         component={PreviousOrderScreen}
         options={{
           tabBarIcon: ({focused, color, size}) => (
-            <Entypo
-              name="shopping-cart"
-              color={focused ? '#FD8D1F' : color}
-              size={30}
-            />
+            <View style={styles.iconStyles}>
+              <PreviousOrder
+                width={25}
+                height={25}
+                fill={focused ? '#FD8D1F' : color}
+              />
+            </View>
           ),
         }}
       />
@@ -55,26 +72,45 @@ const BottomTab = () => {
         component={HomeScreen}
         options={{
           tabBarIcon: ({focused, color, size}) => (
-            <Fontisto
-              name="home"
-              color={focused ? '#FD8D1F' : color}
-              size={30}
-            />
+            <View style={styles.iconStyles}>
+              <HomeIcon
+                width={25}
+                height={25}
+                fill={focused ? '#FD8D1F' : color}
+              />
+            </View>
           ),
         }}
       />
+
+      <Tab.Screen
+        name="UserSetting"
+        component={HomeScreen}
+        options={{
+          tabBarIcon: ({focused, color, size}) => (
+            <View style={styles.iconStyles}>
+              <NotificationIcon
+                width={25}
+                height={25}
+                fill={focused ? '#FD8D1F' : color}
+              />
+            </View>
+          ),
+        }}
+      />
+
       <Tab.Screen
         name="Notification"
         component={HomeScreen}
         options={{
           tabBarIcon: ({focused, color, size}) => (
-            <Image
-              source={require('../assets/icons/notificationIcon.png')}
-              style={[
-                styles.notificationIcons,
-                focused ? {color: '#FD8D1F'} : {color: '#BCBCBC'},
-              ]}
-            />
+            <View style={styles.iconStyles}>
+              <UserSettingIcon
+                width={25}
+                height={25}
+                fill={focused ? '#FD8D1F' : color}
+              />
+            </View>
           ),
         }}
       />
@@ -88,5 +124,9 @@ const styles = StyleSheet.create({
   notificationIcons: {
     width: 26,
     height: 26,
+  },
+
+  iconStyles: {
+    marginTop: 15,
   },
 });
