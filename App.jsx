@@ -13,7 +13,9 @@ const Stack = createNativeStackNavigator();
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='BottomTab'>
+      <Stack.Navigator
+        screenOptions={{headerShown: false}}
+        initialRouteName="BottomTab">
         <Stack.Screen name="Splash" component={SpashScreen} />
         <Stack.Screen name="OfferIntroScreen" component={OfferIntroScreen} />
         <Stack.Screen name="LiveCutting" component={LiveCuttingIntroScreen} />

@@ -3,7 +3,7 @@ import React from 'react';
 import DrawableIcon from '../assets/icons/DrawableIcon.svg';
 const HomeHeader = () => {
   return (
-    <View style={[styles.container]}>
+    <View style={styles.container}>
       <DrawableIcon width={30} height={30} style={styles.drawableIcon} />
       <TouchableOpacity style={styles.profilePicContainer}>
         <Image
@@ -22,10 +22,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center', // Ensures vertical alignment
-    borderBottomWidth: 2, // Apply bottom border for Cart tab
-    paddingBottom: 15,
-    borderBottomColor: '#E3E3E3',
-    padding: 10,
+    borderBottomWidth: 1, // Apply bottom border for Cart tab
+    paddingBottom: 10,
+    borderBottomColor: '#d3d3d3',
+    padding: 15,
+    backgroundColor: '#FFFFFF', // Required for shadow visibility
+    shadowColor: '#000', // Shadow color
+    shadowOffset: {width: 0, height: 3}, // Shadow appears only at the bottom
+    shadowOpacity: 0.1, // Adjust shadow transparency
+    shadowRadius: 3, // Blur effect for shadow
+    elevation: 4, // Required for Android shadow
   },
 
   profilePicContainer: {
