@@ -13,7 +13,7 @@ const CategoriesListing = ({categoriesList}) => {
     <View style={styles.container}>
       <Text style={styles.categoryText}>Categories</Text>
       <View style={{flexDirection: 'row'}}>
-        {/* <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}> */}
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           {categoriesList.map(item => (
             <TouchableOpacity
               key={item.categoryEnglish}
@@ -34,7 +34,19 @@ const CategoriesListing = ({categoriesList}) => {
               </View>
             </TouchableOpacity>
           ))}
-        {/* </ScrollVriew> */}
+        </ScrollView>
+      </View>
+      <View style={styles.sliderContainer}>
+        <TouchableOpacity
+          style={[
+            styles.slideBar,
+            {backgroundColor: '#FD8D1F'},
+          ]}></TouchableOpacity>
+        <TouchableOpacity
+          style={[
+            styles.slideBar,
+            {backgroundColor: 'rgba(253, 141, 31, 0.3)'},
+          ]}></TouchableOpacity>
       </View>
     </View>
   );
@@ -44,7 +56,7 @@ export default CategoriesListing;
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 20,
+    marginTop: 10,
     paddingHorizontal: 10,
   },
 
@@ -57,7 +69,7 @@ const styles = StyleSheet.create({
   categoryContainer: {
     marginTop: 10,
     width: 109,
-    height: 160,
+    height: 155,
     borderRadius: 5,
     borderColor: '#d3d3d3', // Light grey border color
     backgroundColor: '#ffffff', // Solid background color for better shadow effect
@@ -71,7 +83,8 @@ const styles = StyleSheet.create({
     elevation: 5, // Adds shadow for Android
     marginHorizontal: 5,
     overflow: 'visible', // Ensures shadow is rendered outside the bo
-    marginHorizontal: 8,
+    marginHorizontal: 7,
+    marginBottom: 10,
   },
 
   categoryImageContainer: {
@@ -105,5 +118,19 @@ const styles = StyleSheet.create({
     fontFamily: 'InstrumentSans-Medium',
     fontSize: 10,
     color: '#07427A',
+  },
+
+  sliderContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+
+  slideBar: {
+    width: 13,
+    height: 2,
+
+    marginTop: 20,
+    borderRadius: 3,
+    marginHorizontal: 3,
   },
 });
