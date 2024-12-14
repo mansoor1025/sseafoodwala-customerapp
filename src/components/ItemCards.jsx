@@ -7,90 +7,83 @@ const ItemCards = ({item}) => {
   const [count, setCount] = useState(5);
   const stars = [1, 2, 3, 4, 5];
   return (
-    <View style={styles.container}>
-      <View style={styles.itemCardContainer}>
-        <View>
-          <Image
-            source={{
-              uri: item.itemImage,
-            }}
-            style={styles.cardImage}
-          />
-        </View>
-        <View style={styles.itemContentContainer}>
-          <View style={styles.nameStockUpdatesContainer}>
-            <View>
-              <Text style={styles.fishEnglishName}>Barracuda</Text>
-              <Text style={styles.fishUrduName}>(پیکاسو )</Text>
-            </View>
-
-            <Text style={styles.stockText}>In Stock</Text>
-          </View>
-
-          <View style={styles.ratingContainer}>
-            {stars.map(item => (
-              <FontAwesome
-                name={'star'}
-                size={10}
-                color={'#FD8D18'}
-                style={styles.starRating}
-                key={item}
-              />
-            ))}
-
-            <Text style={styles.ratingCount}>(5.0)</Text>
-          </View>
-
-          <View style={styles.priceweightContainer}>
-            <Text style={styles.pricePerKg}>Price Per KG:</Text>
-            <Text style={styles.priceStyle}>
-              <Text style={{fontFamily: 'InstrumentSans-Medium'}}>650 </Text>
-              <Text style={{fontFamily: 'InstrumentSans-SemiBold'}}>PKR</Text>
-            </Text>
-          </View>
-
-          <View style={styles.weightContainer}>
-            <Text style={styles.weightText}>Weight</Text>
-
-            <View style={styles.weightSelectorContainer}>
-              <TouchableOpacity onPress={() => setCount(count + 1)}>
-                <View style={styles.incrementalContainer}>
-                  <FontAwesome6 name={'plus'} size={7} color={'#FFFFFF'} />
-                </View>
-              </TouchableOpacity>
-
-              <View style={styles.kgContainer}>
-                <Text style={styles.kgTextStyle}>
-                  <Text>{count} </Text>
-                  <Text>Kg</Text>
-                </Text>
-              </View>
-
-              <TouchableOpacity
-                style={styles.incrementalContainer}
-                onPress={() => setCount(count - 1)}>
-                <FontAwesome6 name={'minus'} size={7} color={'#FFFFFF'} />
-              </TouchableOpacity>
-            </View>
-          </View>
-
-          <TouchableOpacity style={styles.addToCardButton}>
-            <Text style={styles.addToCartText}>Add to Cart</Text>
-          </TouchableOpacity>
-        </View>
+    <TouchableOpacity style={styles.itemCardContainer}>
+      <View>
+        <Image
+          source={{
+            uri: item.itemImage,
+          }}
+          style={styles.cardImage}
+        />
       </View>
-    </View>
+      <View style={styles.itemContentContainer}>
+        <View style={styles.nameStockUpdatesContainer}>
+          <View>
+            <Text style={styles.fishEnglishName}>Barracuda</Text>
+            <Text style={styles.fishUrduName}>(پیکاسو )</Text>
+          </View>
+
+          <Text style={styles.stockText}>In Stock</Text>
+        </View>
+
+        <View style={styles.ratingContainer}>
+          {stars.map(item => (
+            <FontAwesome
+              name={'star'}
+              size={10}
+              color={'#FD8D18'}
+              style={styles.starRating}
+              key={item}
+            />
+          ))}
+
+          <Text style={styles.ratingCount}>(5.0)</Text>
+        </View>
+
+        <View style={styles.priceweightContainer}>
+          <Text style={styles.pricePerKg}>Price Per KG:</Text>
+          <Text style={styles.priceStyle}>
+            <Text style={{fontFamily: 'InstrumentSans-Medium'}}>650 </Text>
+            <Text style={{fontFamily: 'InstrumentSans-SemiBold'}}>PKR</Text>
+          </Text>
+        </View>
+
+        <View style={styles.weightContainer}>
+          <Text style={styles.weightText}>Weight</Text>
+
+          <View style={styles.weightSelectorContainer}>
+            <TouchableOpacity onPress={() => setCount(count + 1)}>
+              <View style={styles.incrementalContainer}>
+                <FontAwesome6 name={'plus'} size={7} color={'#FFFFFF'} />
+              </View>
+            </TouchableOpacity>
+
+            <View style={styles.kgContainer}>
+              <Text style={styles.kgTextStyle}>
+                <Text>{count} </Text>
+                <Text>Kg</Text>
+              </Text>
+            </View>
+
+            <TouchableOpacity
+              style={styles.incrementalContainer}
+              onPress={() => setCount(count - 1)}>
+              <FontAwesome6 name={'minus'} size={7} color={'#FFFFFF'} />
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        <TouchableOpacity style={styles.addToCardButton}>
+          <Text style={styles.addToCartText}>Add to Cart</Text>
+        </TouchableOpacity>
+      </View>
+    </TouchableOpacity>
   );
 };
 
 export default ItemCards;
 
 const styles = StyleSheet.create({
-  container: {
-    // flexDirection: 'row',
-    // paddingVertical: 10,
-  },
-
   itemCardContainer: {
     width: 108,
     height: 184,

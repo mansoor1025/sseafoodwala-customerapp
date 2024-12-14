@@ -128,8 +128,7 @@ const styles = StyleSheet.create({
   slideBar: {
     width: 13,
     height: 2,
-
-    marginTop: 20,
+    marginTop: 1,
     borderRadius: 3,
     marginHorizontal: 3,
   },
