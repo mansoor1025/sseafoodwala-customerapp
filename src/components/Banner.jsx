@@ -7,14 +7,23 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React from 'react';
+import {useNavigation} from '@react-navigation/native';
+
 const Banner = ({bannersList}) => {
+  const naviagte = useNavigation();
+
   return (
     <View style={styles.container}>
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
         {bannersList.map(item => (
           <TouchableOpacity
             key={item.bannerText}
-            style={styles.bannerContainer}>
+            style={styles.bannerContainer}
+            onPress={() =>
+              naviagte.navigate('ProductList', {
+                headerTitle: item.bannerText,
+              })
+            }>
             <Image
               source={{
                 uri: item.bannerImage,

@@ -72,6 +72,7 @@ const HomeScreen = () => {
       description: 'Fresh arrivals with a timer for daily updates',
       items: [
         {
+          id: 100,
           itemImage:
             'https://res.cloudinary.com/dgiot0v7s/image/upload/v1734138325/image_1_kcmz6m.png',
           fishEnglishName: 'Pomfret',
@@ -79,6 +80,7 @@ const HomeScreen = () => {
           price: 1000,
         },
         {
+          id: 101,
           itemImage:
             'https://res.cloudinary.com/dgiot0v7s/image/upload/v1734147382/image_2_e0d0zf.png',
           fishEnglishName: 'Hilsa',
@@ -86,6 +88,7 @@ const HomeScreen = () => {
           price: 400,
         },
         {
+          id: 103,
           itemImage:
             'https://res.cloudinary.com/dgiot0v7s/image/upload/v1734147741/image_3_iza8jo.png',
           fishEnglishName: 'Tuna',
@@ -93,6 +96,7 @@ const HomeScreen = () => {
           price: 900,
         },
         {
+          id: 104,
           itemImage:
             'https://res.cloudinary.com/dgiot0v7s/image/upload/v1734147741/image_3_iza8jo.png',
           fishEnglishName: 'Tuna',
@@ -107,6 +111,7 @@ const HomeScreen = () => {
       description: 'Premium seafood',
       items: [
         {
+          id: 1,
           itemImage:
             'https://res.cloudinary.com/dgiot0v7s/image/upload/v1734148688/image_4_ml9tui.png',
           fishEnglishName: 'Surmai',
@@ -114,6 +119,7 @@ const HomeScreen = () => {
           price: 4500,
         },
         {
+          id: 2,
           itemImage:
             'https://res.cloudinary.com/dgiot0v7s/image/upload/v1734148870/image_6_w5lhhy.png',
           fishEnglishName: 'Silver Carp',
@@ -121,6 +127,7 @@ const HomeScreen = () => {
           price: 2500,
         },
         {
+          id: 3,
           itemImage:
             'https://res.cloudinary.com/dgiot0v7s/image/upload/v1734148900/image_7_glty1s.png',
           fishEnglishName: 'Tuna',
@@ -128,6 +135,7 @@ const HomeScreen = () => {
           price: 1600,
         },
         {
+          id: 4,
           itemImage:
             'https://res.cloudinary.com/dgiot0v7s/image/upload/v1734148688/image_4_ml9tui.png',
           fishEnglishName: 'Tuna',
@@ -142,6 +150,7 @@ const HomeScreen = () => {
       description: 'Budget-friendly family bundles.',
       items: [
         {
+          id: 5,
           itemImage:
             'https://res.cloudinary.com/dgiot0v7s/image/upload/v1734149278/image_8_sojfp4.png',
           fishEnglishName: 'Surmai',
@@ -149,6 +158,7 @@ const HomeScreen = () => {
           price: 4500,
         },
         {
+          id: 6,
           itemImage:
             'https://res.cloudinary.com/dgiot0v7s/image/upload/v1734149316/image_9_hu5cox.png',
           fishEnglishName: 'Silver Carp',
@@ -156,6 +166,7 @@ const HomeScreen = () => {
           price: 2500,
         },
         {
+          id: 7,
           itemImage:
             'https://res.cloudinary.com/dgiot0v7s/image/upload/v1734149462/image_10_qoolbz.png',
           fishEnglishName: 'Tuna',
@@ -163,9 +174,10 @@ const HomeScreen = () => {
           price: 1600,
         },
         {
+          id: 8,
           itemImage:
             'https://res.cloudinary.com/dgiot0v7s/image/upload/v1734148688/image_4_ml9tui.png',
-          fishEnglishName: 'Tuna',
+          fishEnglishName: 'Keera',
           fishUrduName: '( ٹونا)',
           price: 1800,
         },
@@ -189,7 +201,7 @@ const HomeScreen = () => {
           <EarnRewards />
           <CategoriesListing categoriesList={categoriesList} />
           {dealItemLists.map(item => (
-            <ProductListing item={item} />
+            <ProductListing key={item.title} item={item} />
           ))}
         </ScrollView>
       </View>

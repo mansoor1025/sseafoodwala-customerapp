@@ -6,8 +6,11 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
+import {useNavigation} from '@react-navigation/native';
 
 const EarnRewards = () => {
+  const navigate = useNavigation();
+
   return (
     <View style={styles.container}>
       <View style={styles.rewardContainer}>
@@ -16,7 +19,9 @@ const EarnRewards = () => {
           style={styles.earnBgImage}>
           <Text style={styles.earnText}>Earn Rewards with </Text>
           <Text style={styles.referralText}>Referrals</Text>
-          <TouchableOpacity style={styles.inviteButtonContainer}>
+          <TouchableOpacity
+            style={styles.inviteButtonContainer}
+            onPress={() => navigate.navigate('ReferralEarn')}>
             <Text style={styles.inviteText}>Invite Friends</Text>
           </TouchableOpacity>
         </ImageBackground>

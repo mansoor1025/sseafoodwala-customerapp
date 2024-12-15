@@ -14,6 +14,8 @@ import NotificationIcon from '../assets/icons/notificationIcon.svg';
 import UserSettingIcon from '../assets/icons/userSettingIcon.svg';
 import {Dimensions} from 'react-native';
 import Icon from '../components/Icons';
+import ReferralEarn from '../screens/ReferralEarnScreen';
+import HomeStack from './HomeStack';
 
 const screenWidth = Dimensions.get('window').width;
 
@@ -22,7 +24,7 @@ const Tab = createBottomTabNavigator();
 const BottomTab = ({route}) => {
   return (
     <Tab.Navigator
-      initialRouteName="Home"
+      initialRouteName="Cart"
       screenOptions={{
         tabBarActiveTintColor: '#FD8D1F',
         tabBarInactiveTintColor: '#BCBCBC',
@@ -69,7 +71,7 @@ const BottomTab = ({route}) => {
 
       <Tab.Screen
         name="Home"
-        component={HomeScreen}
+        component={HomeStack}
         options={{
           tabBarIcon: ({focused, color, size}) => (
             <View style={styles.iconStyles}>

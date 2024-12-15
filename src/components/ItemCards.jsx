@@ -2,12 +2,16 @@ import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useState} from 'react';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
+import {useNavigation} from '@react-navigation/native';
 
 const ItemCards = ({item}) => {
+  const navigate = useNavigation();
   const [count, setCount] = useState(5);
   const stars = [1, 2, 3, 4, 5];
   return (
-    <TouchableOpacity style={styles.itemCardContainer}>
+    <TouchableOpacity
+      style={styles.itemCardContainer}
+      onPress={() => navigate.navigate('ItemDetail')}>
       <View>
         <Image
           source={{
@@ -19,8 +23,8 @@ const ItemCards = ({item}) => {
       <View style={styles.itemContentContainer}>
         <View style={styles.nameStockUpdatesContainer}>
           <View>
-            <Text style={styles.fishEnglishName}>Barracuda</Text>
-            <Text style={styles.fishUrduName}>(پیکاسو )</Text>
+            <Text style={styles.fishEnglishName}>{item.fishEnglishName}</Text>
+            <Text style={styles.fishUrduName}>{item.fishUrduName}</Text>
           </View>
 
           <Text style={styles.stockText}>In Stock</Text>
@@ -36,14 +40,15 @@ const ItemCards = ({item}) => {
               key={item}
             />
           ))}
-
           <Text style={styles.ratingCount}>(5.0)</Text>
         </View>
 
         <View style={styles.priceweightContainer}>
           <Text style={styles.pricePerKg}>Price Per KG:</Text>
           <Text style={styles.priceStyle}>
-            <Text style={{fontFamily: 'InstrumentSans-Medium'}}>650 </Text>
+            <Text style={{fontFamily: 'InstrumentSans-Medium'}}>
+              {item.price}{' '}
+            </Text>
             <Text style={{fontFamily: 'InstrumentSans-SemiBold'}}>PKR</Text>
           </Text>
         </View>
@@ -67,7 +72,7 @@ const ItemCards = ({item}) => {
 
             <TouchableOpacity
               style={styles.incrementalContainer}
-              onPress={() => setCount(count - 1)}>
+              onPress={() => setCount(count > 0 ? count - 1 : 0)}>
               <FontAwesome6 name={'minus'} size={7} color={'#FFFFFF'} />
             </TouchableOpacity>
           </View>
@@ -86,8 +91,8 @@ export default ItemCards;
 const styles = StyleSheet.create({
   itemCardContainer: {
     width: 108,
-    height: 184,
-    borderRadius: 5,
+    height: 195,
+    borderRadius: 7,
     borderColor: '#d3d3d3', // Light grey border color
     backgroundColor: '#ffffff', // Solid background color for better shadow effect
     shadowColor: '#000000', // Darker shadow for better visibility outside
@@ -100,7 +105,7 @@ const styles = StyleSheet.create({
     elevation: 5, // Adds shadow for Android
     marginHorizontal: 5,
     overflow: 'visible', // Ensures shadow is rendered outside the bo
-    marginHorizontal: 7,
+    marginHorizontal: 5,
     marginBottom: 10,
   },
 
@@ -174,13 +179,14 @@ const styles = StyleSheet.create({
   weightContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingVertical: 3,
+    paddingVertical: 7,
   },
 
   weightText: {
     fontFamily: 'InstrumentSans-SemiBold',
-    fontSize: 8,
+    fontSize: 9,
     color: 'rgba(7, 66, 122, 0.8)',
+    paddingVertical: 2,
   },
 
   weightSelectorContainer: {
@@ -189,9 +195,9 @@ const styles = StyleSheet.create({
   },
 
   incrementalContainer: {
-    width: 10,
-    height: 10,
-    borderRadius: 10 / 2,
+    width: 15,
+    height: 15,
+    borderRadius: 15 / 2,
     backgroundColor: '#FD8D18',
     justifyContent: 'center',
     alignItems: 'center',
@@ -207,6 +213,7 @@ const styles = StyleSheet.create({
     borderRadius: 2,
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: 3,
   },
 
   kgTextStyle: {
@@ -220,7 +227,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#FD8D18',
     borderRadius: 3,
     justifyContent: 'center',
+    alignContent: 'center',
     alignItems: 'center',
+    alignSelf: 'center',
     marginTop: 1,
   },
 
