@@ -24,7 +24,7 @@ const Tab = createBottomTabNavigator();
 const BottomTab = ({route}) => {
   return (
     <Tab.Navigator
-      initialRouteName="Cart"
+      initialRouteName="Home"
       screenOptions={{
         tabBarActiveTintColor: '#FD8D1F',
         tabBarInactiveTintColor: '#BCBCBC',
