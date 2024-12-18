@@ -16,6 +16,7 @@ import {Dimensions} from 'react-native';
 import Icon from '../components/Icons';
 import ReferralEarn from '../screens/ReferralEarnScreen';
 import HomeStack from './HomeStack';
+import CartStack from './CartStack';
 
 const screenWidth = Dimensions.get('window').width;
 
@@ -39,7 +40,7 @@ const BottomTab = ({route}) => {
       }}>
       <Tab.Screen
         name="Cart"
-        component={AddToCartScreen}
+        component={CartStack}
         options={{
           tabBarIcon: ({focused, color, size}) => (
             <View style={styles.iconStyles}>

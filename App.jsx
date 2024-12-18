@@ -8,14 +8,16 @@ import LiveCuttingIntroScreen from './src/screens/LiveCuttingIntroScreen';
 import FastDeliveryIntroScreen from './src/screens/FastDeliveryIntroScreen';
 import SelectCityScreen from './src/screens/SelectCityScreen';
 import BottomTab from './src/navigation/BottomTab';
+import LoginScreen from './src/screens/LoginScreen';
 const Stack = createNativeStackNavigator();
 
 const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialState="BottomTab"
+        initialState="Login"
         screenOptions={{headerShown: false, animation: 'slide_from_bottom'}}>
+        <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Splash" component={SpashScreen} />
         <Stack.Screen name="OfferIntroScreen" component={OfferIntroScreen} />
         <Stack.Screen name="LiveCutting" component={LiveCuttingIntroScreen} />

@@ -13,7 +13,7 @@ const HomeStack = () => {
   return (
     <Stack.Navigator
       screenOptions={{headerShown: false, animation: 'slide_from_bottom'}}
-      initialRouteName="Checkout">
+      initialRouteName="HomeScreen">
       <Stack.Screen name="HomeScreen" component={HomeScreen} />
       <Stack.Screen name="ReferralEarn" component={ReferralEarn} />
       <Stack.Screen name="ProductList" component={ProductListScreen} />
