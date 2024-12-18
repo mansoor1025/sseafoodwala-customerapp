@@ -14,6 +14,7 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
+        initialState="BottomTab"
         screenOptions={{headerShown: false, animation: 'slide_from_bottom'}}>
         <Stack.Screen name="Splash" component={SpashScreen} />
         <Stack.Screen name="OfferIntroScreen" component={OfferIntroScreen} />
