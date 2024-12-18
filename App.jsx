@@ -9,6 +9,7 @@ import FastDeliveryIntroScreen from './src/screens/FastDeliveryIntroScreen';
 import SelectCityScreen from './src/screens/SelectCityScreen';
 import BottomTab from './src/navigation/BottomTab';
 import LoginScreen from './src/screens/LoginScreen';
+import EnterPhoneNumberScreen from './src/screens/EnterPhoneNumberScreen';
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -17,7 +18,12 @@ const App = () => {
       <Stack.Navigator
         initialState="Login"
         screenOptions={{headerShown: false, animation: 'slide_from_bottom'}}>
+        <Stack.Screen
+          name="EnterPhoneNumber"
+          component={EnterPhoneNumberScreen}
+        />
         <Stack.Screen name="Login" component={LoginScreen} />
+
         <Stack.Screen name="Splash" component={SpashScreen} />
         <Stack.Screen name="OfferIntroScreen" component={OfferIntroScreen} />
         <Stack.Screen name="LiveCutting" component={LiveCuttingIntroScreen} />
