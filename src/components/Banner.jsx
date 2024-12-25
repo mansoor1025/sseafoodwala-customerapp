@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 1,
     borderColor: '#d3d3d3', // Light grey border color
-    backgroundColor: '#ffffff', // Solid background color for better shadow effect
+    backgroundColor: '#FFFFFF', // Solid background color for better shadow effect
     shadowColor: '#000000', // Darker shadow for better visibility outside
     shadowOffset: {
       width: 0,

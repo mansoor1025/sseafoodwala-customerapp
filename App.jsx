@@ -12,6 +12,7 @@ import LoginScreen from './src/screens/LoginScreen';
 import EnterPhoneNumberScreen from './src/screens/EnterPhoneNumberScreen';
 import OtpVerificationScreen from './src/screens/OtpVerificationScreen';
 import BillingAddressScreen from './src/screens/BillingAddressScreen';
+import PaymentMethodScreen from './src/screens/PaymentMethodScreen';
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -20,9 +21,11 @@ const App = () => {
       <Stack.Navigator
         initialState="Login"
         screenOptions={{headerShown: false, animation: 'slide_from_bottom'}}>
+        
+        
         <Stack.Screen
-          name="BillingAddress"
-          component={BillingAddressScreen}
+          name="PaymentMethod"
+          component={PaymentMethodScreen}
         />
 
         <Stack.Screen

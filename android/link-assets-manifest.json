@@ -22,16 +22,60 @@
       "sha1": "dc0e994aa5409ffe7b946a900f4b61fffb99a32e"
     },
     {
-      "path": "src/assets/icons/cartIcon.svg",
-      "sha1": "7a539739409f8a2c57535b42dcfccbc098681022"
+      "path": "src/assets/icons/CopyClipBoard.svg",
+      "sha1": "2b57cbf441aecd4bb25bae026fcb70ef6e9cc207"
     },
     {
       "path": "src/assets/icons/DrawableIcon.svg",
       "sha1": "2558f507f49d03579e74b0db2672148742987854"
     },
     {
+      "path": "src/assets/icons/EmailIcon.svg",
+      "sha1": "83f8babcabd6ae2e0878fac488cedecb590e3ed7"
+    },
+    {
+      "path": "src/assets/icons/Facebook.svg",
+      "sha1": "ac81c4e73b679326e6b6118d2e55372da9c86e77"
+    },
+    {
+      "path": "src/assets/icons/FilterIcon.svg",
+      "sha1": "78ee5f27761acb47d6188a9d94d2abcbb3879a00"
+    },
+    {
+      "path": "src/assets/icons/GoogleIcon.svg",
+      "sha1": "c3e4f5efa3542d90fa6c96d4e6b120283a2d7915"
+    },
+    {
       "path": "src/assets/icons/HomeIcon.svg",
       "sha1": "26b2030560fce2ea7ac59d763b0a31036a9d1250"
+    },
+    {
+      "path": "src/assets/icons/MapIcon.svg",
+      "sha1": "16d4c47f3a072ffdf992d8cc6b2806d1b605cd00"
+    },
+    {
+      "path": "src/assets/icons/MessageIcon.svg",
+      "sha1": "279efdab76e143bf83e0e09dc150cc33e80bae91"
+    },
+    {
+      "path": "src/assets/icons/OrderSummaryIcon.svg",
+      "sha1": "869a1f48166c53c16da60df07798c6924948269f"
+    },
+    {
+      "path": "src/assets/icons/PencilIcon.svg",
+      "sha1": "d1ade50e239e8ca0f6039611b2106b846a7c3dff"
+    },
+    {
+      "path": "src/assets/icons/ShareIcon.svg",
+      "sha1": "80a97abfb4633abe902b14b123fb67940673481e"
+    },
+    {
+      "path": "src/assets/icons/WhatsappIcon.svg",
+      "sha1": "2d858b51a69ab9b58e3721277b9b1a4c0bca59ca"
+    },
+    {
+      "path": "src/assets/icons/cartIcon.svg",
+      "sha1": "7a539739409f8a2c57535b42dcfccbc098681022"
     },
     {
       "path": "src/assets/icons/notificationIcon.svg",
@@ -48,6 +92,14 @@
     {
       "path": "src/assets/icons/userSettingIcon.svg",
       "sha1": "2bcf3e0c505ec555d4d82de7714309577c046d6b"
+    },
+    {
+      "path": "src/assets/images/PhoneNumberillustration.png",
+      "sha1": "220c5d54bc06ad1860d6bf1276ff5056bb3f266e"
+    },
+    {
+      "path": "src/assets/images/billingAddressillustration.png",
+      "sha1": "d396fd52089a35c682aeda4610378ef10890e3dd"
     },
     {
       "path": "src/assets/images/earnRewardBg.png",
@@ -74,8 +126,16 @@
       "sha1": "2753ced86d418b24421d3cda666404982ec56e3a"
     },
     {
+      "path": "src/assets/images/referEarn.png",
+      "sha1": "1a753002f0d89efac0affcdf5445b62f50a0488c"
+    },
+    {
       "path": "src/assets/images/seafoodTextImage.png",
       "sha1": "4a1368ff221abe3965935f7c1e7cb8db882eaf78"
+    },
+    {
+      "path": "src/assets/images/verificationIllustration.png",
+      "sha1": "4de0cd08931f7c744c9d14ec1e77f0fb8d955a08"
     },
     {
       "path": "src/assets/images/waterbackground.png",

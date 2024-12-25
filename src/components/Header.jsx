@@ -25,13 +25,14 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1, // Apply bottom border for Cart tab
     paddingBottom: 10,
     borderBottomColor: '#d3d3d3',
-    padding: 15,
     backgroundColor: '#FFFFFF', // Required for shadow visibility
     shadowColor: '#000', // Shadow color
     shadowOffset: {width: 0, height: 3}, // Shadow appears only at the bottom
     shadowOpacity: 0.1, // Adjust shadow transparency
     shadowRadius: 3, // Blur effect for shadow
     elevation: 4, // Required for Android shadow
+    alignItems: 'center', // Centers content horizontally
+    justifyContent: 'center', // Centers content vertically
   },
 
   titleText: {
@@ -39,7 +40,6 @@ const styles = StyleSheet.create({
     fontSize: 22,
     color: '#4D4D4D',
     textAlign: 'center',
-    paddingHorizontal: 80,
-    paddingVertical: 2,
+    flex: 1, // Makes sure the text takes available space and is centered
   },
 });
