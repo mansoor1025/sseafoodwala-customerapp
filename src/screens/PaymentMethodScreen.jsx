@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import Header from '../components/Header';
-import {SelectList} from 'react-native-dropdown-select-list';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const PaymentMethodScreen = () => {
