@@ -11,6 +11,7 @@ import {
 import React, {useState} from 'react';
 import Header from '../components/Header';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import SelectOnlinePayment from '../components/SelectOnlinePayment';
 
 const PaymentMethodScreen = () => {
   const paymentMethods = [
@@ -120,86 +121,12 @@ const PaymentMethodScreen = () => {
             })}
 
             {selectPayment === 'Cash on Delivery' && (
-              <View style={styles.selectListContainer}>
-                <TouchableOpacity style={styles.selectList}>
-                  <Text style={styles.onlinePaymentText}>
-                    Select Your Online Payment
-                  </Text>
-                  <AntDesign
-                    name={'caretdown'}
-                    size={15}
-                    color={'rgba(29, 27, 32, 0.7)'}
-                  />
-                </TouchableOpacity>
-                <View style={styles.paymentListContainer}>
-                  {onlinePaymentMethodList?.map(item => {
-                    return (
-                      <TouchableOpacity
-                        style={[
-                          styles.paymentList,
-                          onlinePayment === item.content && {
-                            backgroundColor: '#07427A',
-                          },
-                        ]}
-                        key={item.content}
-                        onPress={() => setOnlinePayment(item.content)}>
-                        <Image
-                          source={{
-                            uri: item.image,
-                          }}
-                          style={{
-                            width: item.imageSize.width,
-                            height: item.imageSize.height,
-                            resizeMode: 'cover',
-                          }}
-                        />
-                        <Text
-                          style={[
-                            styles.contentList,
-                            onlinePayment === item.content && {
-                              color: '#FFFFFF',
-                            },
-                          ]}>
-                          {item.content}
-                        </Text>
-
-                        {onlinePayment === item.content && (
-                          <AntDesign
-                            name={'check'}
-                            size={20}
-                            style={styles.checkIcon}
-                            color={'#FFFFFF'}
-                          />
-                        )}
-                      </TouchableOpacity>
-                    );
-                  })}
-                </View>
-
-                <Text style={styles.noteText}>
-                  <Text style={{fontFamily: 'InstrumentSans-Medium'}}>
-                    Note:{' '}
-                  </Text>
-                  <Text style={{fontFamily: 'InstrumentSans-Regular'}}>
-                    For{' '}
-                  </Text>
-                  <Text style={{fontFamily: 'InstrumentSans-Medium'}}>
-                    COD{' '}
-                  </Text>
-                  <Text style={{fontFamily: 'InstrumentSans-Regular'}}>
-                    orders, pay{' '}
-                  </Text>
-                  <Text style={{fontFamily: 'InstrumentSans-Medium'}}>
-                    20% in advance{' '}
-                  </Text>
-                  <Text style={{fontFamily: 'InstrumentSans-Regular'}}>
-                    online and the remaining{' '}
-                  </Text>
-                  <Text style={{fontFamily: 'InstrumentSans-Medium'}}>
-                    80% upon delivery.
-                  </Text>
-                </Text>
-              </View>
+              <SelectOnlinePayment
+                onlinePaymentMethodList={onlinePaymentMethodList}
+                setOnlinePayment={setOnlinePayment}
+                onlinePayment={onlinePayment}
+                note={true}
+              />
             )}
             <TouchableOpacity style={styles.continueButton}>
               <Text style={styles.continueText}>Continue</Text>
@@ -277,70 +204,6 @@ const styles = StyleSheet.create({
     borderRadius: 17 / 2,
     borderColor: 'rgba(7, 66, 122, 0.6)',
     borderWidth: 0.9,
-  },
-
-  selectList: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    borderRadius: 10,
-    width: '100%',
-    height: 50,
-    alignItems: 'center',
-    borderColor: '#D7D7D7',
-    borderWidth: 0.5,
-    backgroundColor: '#F4FDFF',
-  },
-
-  selectListContainer: {
-    width: '100%',
-    height: 186,
-    borderColor: '#D7D7D7',
-    borderWidth: 1,
-    borderRadius: 5,
-    backgroundColor: '#FCFEFF',
-    shadowColor: '#000000', // Darker shadow for better visibility outside
-    shadowOffset: {
-      width: 0,
-      height: 2, // Pushes the shadow below the container
-    },
-    shadowOpacity: 0.1, // Lower opacity for a subtle effect
-    shadowRadius: 4, // Increases the blur to push shadow further
-    elevation: 3, // Adds shadow for Android
-    marginHorizontal: 5,
-    overflow: 'visible', // Ensures shadow is rendered outside the bounds
-  },
-
-  onlinePaymentText: {
-    fontFamily: 'InstrumentSans-Medium',
-    fontSize: 16,
-    color: 'rgba(0, 0, 0, 0.7)',
-  },
-
-  paymentListContainer: {
-    marginTop: 10,
-  },
-
-  paymentList: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    width: '100%',
-    height: 40,
-    paddingHorizontal: 40,
-    borderRadius: 10,
-  },
-
-  contentList: {
-    fontFamily: 'InstrumentSans-Medium',
-    fontSize: 16,
-    color: '#000000',
-    marginLeft: '25%',
-  },
-
-  noteText: {
-    marginTop: 30,
-    fontSize: 14,
-    color: '#000000',
-    textAlign: 'center',
   },
 
   continueButton: {

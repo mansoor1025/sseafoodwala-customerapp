@@ -17,6 +17,8 @@ import Icon from '../components/Icons';
 import ReferralEarn from '../screens/ReferralEarnScreen';
 import HomeStack from './HomeStack';
 import CartStack from './CartStack';
+import NotificationScreen from '../screens/NotificationScreen';
+import UserSettingScreen from '../screens/UserSettingScreen';
 
 const screenWidth = Dimensions.get('window').width;
 
@@ -87,8 +89,8 @@ const BottomTab = ({route}) => {
       />
 
       <Tab.Screen
-        name="UserSetting"
-        component={HomeScreen}
+        name="Notification"
+        component={NotificationScreen}
         options={{
           tabBarIcon: ({focused, color, size}) => (
             <View style={styles.iconStyles}>
@@ -103,8 +105,8 @@ const BottomTab = ({route}) => {
       />
 
       <Tab.Screen
-        name="Notification"
-        component={HomeScreen}
+        name="UserSetting"
+        component={UserSettingScreen}
         options={{
           tabBarIcon: ({focused, color, size}) => (
             <View style={styles.iconStyles}>

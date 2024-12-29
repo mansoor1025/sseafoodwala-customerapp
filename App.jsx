@@ -15,6 +15,12 @@ import BillingAddressScreen from './src/screens/BillingAddressScreen';
 import PaymentMethodScreen from './src/screens/PaymentMethodScreen';
 import CardInformationScreen from './src/screens/CardInformationScreen';
 import ConfirmOrderScreen from './src/screens/ConfirmOrderScreen';
+import EditProfileScreen from './src/screens/EditProfileScreen';
+import AccountSettingScreen from './src/screens/AccountSettingScreen';
+import LiveCuttingRequestScreen from './src/screens/LiveCuttingRequestScreen';
+import SessionHistoryScreen from './src/screens/SessionHistoryScreen';
+import FeedBackScreen from './src/screens/FeedBackScreen';
+import TrackOrderScreen from './src/screens/TrackOrderScreen';
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -23,7 +29,16 @@ const App = () => {
       <Stack.Navigator
         initialState="Login"
         screenOptions={{headerShown: false, animation: 'slide_from_bottom'}}>
-          
+        <Stack.Screen name="TrackOrderScreen" component={TrackOrderScreen} />
+        <Stack.Screen name="FeedBack" component={FeedBackScreen} />
+        <Stack.Screen name="SessionHistory" component={SessionHistoryScreen} />
+        <Stack.Screen
+          name="LiveCuttingRequest"
+          component={LiveCuttingRequestScreen}
+        />
+        <Stack.Screen name="BottomTab" component={BottomTab} />
+        <Stack.Screen name="AccountSetting" component={AccountSettingScreen} />
+
         <Stack.Screen name="ConfirmOrder" component={ConfirmOrderScreen} />
 
         <Stack.Screen
@@ -50,7 +65,6 @@ const App = () => {
         <Stack.Screen name="LiveCutting" component={LiveCuttingIntroScreen} />
         <Stack.Screen name="FastDelivery" component={FastDeliveryIntroScreen} />
         <Stack.Screen name="SelectCity" component={SelectCityScreen} />
-        <Stack.Screen name="BottomTab" component={BottomTab} />
       </Stack.Navigator>
     </NavigationContainer>
   );
