@@ -1,7 +1,14 @@
-import {StyleSheet, Text, TextInput, View} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React, {useState} from 'react';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
-import RNPickerSelect from 'react-native-picker-select';
+import DropDownIcon from '../assets/icons/DropDownIcon.svg';
+import SelectCityModal from './SelectCityModal';
 
 const InputSearchCategory = () => {
   const cities = [
@@ -17,7 +24,8 @@ const InputSearchCategory = () => {
     {label: 'Faisalabad', value: 'faisalabad'},
   ];
 
-  const [selectedCity, setSelectedCity] = useState(null);
+  const [selectCity, setSelectedCity] = useState('Karachi');
+  const [isModalVisible, setModalVisible] = useState(false);
 
   return (
     <View style={styles.searchContainer}>
@@ -36,17 +44,20 @@ const InputSearchCategory = () => {
 
         <View style={styles.divider}></View>
 
-        <RNPickerSelect
-          onValueChange={value => setSelectedCity(value)}
-          items={cities}
-          style={pickerSelectStyles}
-          placeholder={{
-            label: 'Karachi',
-            value: 'Karachi',
-            color: 'blue',
-          }}
-        />
+        <TouchableOpacity onPress={() => setModalVisible(!isModalVisible)}>
+          <Text style={styles.selectedCityText}>{selectCity}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => setModalVisible(!isModalVisible)}>
+          <DropDownIcon width={10} height={10} />
+        </TouchableOpacity>
       </View>
+
+      <SelectCityModal
+        isModalVisible={isModalVisible}
+        setModalVisible={setModalVisible}
+        setSelectedCity={setSelectedCity}
+        cities={cities}
+      />
     </View>
   );
 };
@@ -58,11 +69,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: 30,
     alignSelf: 'center',
-    width: 311,
+    width: '90%',
     height: 40,
     borderColor: 'rgba(7, 66, 122, 0.5)', // 50% opacity color
     borderWidth: 1,
     borderRadius: 30,
+    overflow: 'hidden', // Prevent content overflow
+    paddingHorizontal: 2,
   },
 
   categoryInput: {
@@ -70,16 +83,10 @@ const styles = StyleSheet.create({
     fontFamily: 'InstrumentSans-MediumItalic',
     fontSize: 12,
     color: 'rgba(7, 66, 122, 0.3)',
-    paddingHorizontal: 12,
+    paddingHorizontal: 8,
   },
 
-  inputBoxSearchContainer: {
-    flexDirection: 'row',
-  },
-
-  searchIcon: {
-    paddingVertical: 3,
-  },
+  inputOtherContent: {flex: 1, flexDirection: 'row', alignItems: 'center'},
 
   divider: {
     borderColor: 'rgba(7, 66, 122, 0.8)',
@@ -90,32 +97,10 @@ const styles = StyleSheet.create({
     marginLeft: 6,
   },
 
-  inputOtherContent: {flex: 1, flexDirection: 'row'},
-});
-
-const pickerSelectStyles = StyleSheet.create({
-  inputIOS: {
-    height: 50,
-    fontSize: 16,
-    paddingVertical: 12,
-    paddingHorizontal: 10,
-    borderWidth: 1,
-    borderColor: '#D7D7D7',
-    borderRadius: 8,
-    color: '#000000',
-    backgroundColor: '#F4FDFF',
-    paddingRight: 30, // To ensure text is not cut off
-  },
-  inputAndroid: {
-    height: 50,
-    fontSize: 16,
-    paddingVertical: 8,
-    paddingHorizontal: 10,
-    borderWidth: 1,
-    borderColor: '#D7D7D7',
-    borderRadius: 8,
-    color: '#000000',
-    backgroundColor: '#F4FDFF',
-    paddingRight: 30, // To ensure text is not cut off
+  selectedCityText: {
+    fontFamily: 'InstrumentSans-Medium',
+    fontSize: 12,
+    color: 'rgba(7, 66, 122, 0.8)',
+    paddingHorizontal: 5,
   },
 });

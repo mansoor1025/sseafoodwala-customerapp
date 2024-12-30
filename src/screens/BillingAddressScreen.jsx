@@ -9,7 +9,8 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React, {useState} from 'react';
-import {SelectList} from 'react-native-dropdown-select-list';
+import { SelectList } from 'react-native-dropdown-select-list'
+
 
 const BillingAddressScreen = () => {
   const [selected, setSelected] = useState('');

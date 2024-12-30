@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
   categoryContainer: {
     marginTop: 10,
     width: 109,
-    height: 155,
+    height: 'auto',
     borderRadius: 5,
     borderColor: '#d3d3d3', // Light grey border color
     backgroundColor: '#ffffff', // Solid background color for better shadow effect

@@ -29,6 +29,7 @@ const App = () => {
       <Stack.Navigator
         initialState="Login"
         screenOptions={{headerShown: false, animation: 'slide_from_bottom'}}>
+        <Stack.Screen name="BottomTab" component={BottomTab} />
         <Stack.Screen name="TrackOrderScreen" component={TrackOrderScreen} />
         <Stack.Screen name="FeedBack" component={FeedBackScreen} />
         <Stack.Screen name="SessionHistory" component={SessionHistoryScreen} />
@@ -36,7 +37,7 @@ const App = () => {
           name="LiveCuttingRequest"
           component={LiveCuttingRequestScreen}
         />
-        <Stack.Screen name="BottomTab" component={BottomTab} />
+
         <Stack.Screen name="AccountSetting" component={AccountSettingScreen} />
 
         <Stack.Screen name="ConfirmOrder" component={ConfirmOrderScreen} />
