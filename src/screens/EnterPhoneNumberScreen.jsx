@@ -9,8 +9,10 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 const EnterPhoneNumberScreen = () => {
+  const navigate = useNavigation();
   return (
     <SafeAreaView style={styles.safeareaContainer}>
       <StatusBar
@@ -48,7 +50,7 @@ const EnterPhoneNumberScreen = () => {
           <Text style={{color: '#FD8D1F'}}>Error</Text>
         </Text>
 
-        <TouchableOpacity style={styles.getOtpCodeButton} activeOpacity={0.7}>
+        <TouchableOpacity style={styles.getOtpCodeButton} activeOpacity={0.7} onPress={()=> navigate.navigate('OtpVerification')}>
           <Text style={styles.getOtpText}>Get OTP Code</Text>
         </TouchableOpacity>
       </View>

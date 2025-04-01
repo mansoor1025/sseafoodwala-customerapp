@@ -12,8 +12,10 @@ import React from 'react';
 import Header from '../components/Header';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import TextInputLabel from '../components/TextInputLabel';
+import { useNavigation } from '@react-navigation/native';
 
 const CardInformationScreen = () => {
+  const navigate = useNavigation();
   return (
     <SafeAreaView style={styles.safeareaContainer}>
       <StatusBar
@@ -76,7 +78,7 @@ const CardInformationScreen = () => {
             />
           </View>
 
-          <TouchableOpacity style={styles.confirmOrderButton}>
+          <TouchableOpacity style={styles.confirmOrderButton} onPress={()=>navigate.navigate('ConfirmOrder')}>
             <Text style={styles.confirmText}>Confirm Order</Text>
           </TouchableOpacity>
         </View>

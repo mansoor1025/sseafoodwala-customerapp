@@ -15,6 +15,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import ToggleSwitch from 'toggle-switch-react-native';
 import ItemCards from '../components/ItemCards';
+import { useNavigation } from '@react-navigation/native';
 
 const ItemDetailScreen = () => {
   const stars = [1, 2, 3, 4, 5];
@@ -78,6 +79,7 @@ const ItemDetailScreen = () => {
       price: 900,
     },
   ];
+  const navigate = useNavigation();
 
   const handleToggle = () => {
     setIsOn(!isOn);
@@ -185,7 +187,7 @@ const ItemDetailScreen = () => {
               </Text>
             </View>
 
-            <TouchableOpacity style={styles.addToCartContainer}>
+            <TouchableOpacity style={styles.addToCartContainer} onPress={()=> navigate.navigate('CartScreen')}>
               <Text style={styles.addToCartText}>Add to Cart</Text>
             </TouchableOpacity>
           </View>

@@ -1,13 +1,23 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useNavigationState} from '@react-navigation/native';
 
-const Header = ({title}) => {
+const Header = ({title, navigationScreen}) => {
   const navigate = useNavigation();
+  const currentScreenName = useNavigationState(
+    state => state.routes[state.index].name
+  );
+  const goBackToPreviousScreen = () => {
+    navigate.goBack();
+  };
+
+  console.log("currentScreenName******",currentScreenName);
+  
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => navigate.navigate('HomeScreen')}>
+      <TouchableOpacity
+        onPress={() => navigate.navigate(goBackToPreviousScreen())}>
         <Ionicons name={'chevron-back'} size={30} />
       </TouchableOpacity>
 

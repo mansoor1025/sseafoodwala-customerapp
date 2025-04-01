@@ -11,8 +11,10 @@ import React from 'react';
 import Header from '../components/Header';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import TrackIcon from '../assets/icons/TrackIcon.svg';
+import {useNavigation} from '@react-navigation/native';
 
 const ConfirmOrderScreen = () => {
+  const navigate = useNavigation();
   return (
     <SafeAreaView style={styles.safeareaContainer}>
       <StatusBar
@@ -43,11 +45,15 @@ const ConfirmOrderScreen = () => {
           <Text style={styles.trackText}>Track Your Order</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.continueButton}>
+        <TouchableOpacity
+          style={styles.continueButton}
+          onPress={() => navigate.navigate('BottomTab')}>
           <Text style={styles.continueText}>Continue Shopping</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.continueButton}>
+        <TouchableOpacity
+          style={styles.continueButton}
+          onPress={() => navigate.navigate('BottomTab')}>
           <Text style={styles.continueText}>Go To Home</Text>
         </TouchableOpacity>
       </View>

@@ -6,15 +6,18 @@ import {
   View,
   ScrollView,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import HomeHeader from '../components/HomeHeader';
 import InputSearchCategory from '../components/InputSearchCategory';
 import Banner from '../components/Banner';
 import EarnRewards from '../components/EarnRewards';
 import CategoriesListing from '../components/CategoriesListing';
 import ProductListing from '../components/ProductListing';
+import { getFetchData } from '../services/helper/helper';
 
 const HomeScreen = () => {
+  const [categoriesList, setCategoriesList] = useState([]);
+
   const bannersList = [
     {
       bannerImage:
@@ -30,39 +33,6 @@ const HomeScreen = () => {
       bannerImage:
         'https://res.cloudinary.com/dgiot0v7s/image/upload/v1734024060/Banner_poondb.png',
       bannerText: 'Fresh Fish',
-    },
-  ];
-
-  const categoriesList = [
-    {
-      categoeryImage:
-        'https://res.cloudinary.com/dgiot0v7s/image/upload/v1734031521/pngwing.com_3_1_wmdvh9.png',
-      categoryEnglish: 'Live Fishes',
-      categoryUrdu: '(زندہ مچھلی)',
-    },
-    {
-      categoeryImage:
-        'https://res.cloudinary.com/dgiot0v7s/image/upload/v1734032896/pngegg_4_1_rx06pd.png',
-      categoryEnglish: 'Sea Fishes',
-      categoryUrdu: '(سمندری مچھلیاں)',
-    },
-    {
-      categoeryImage:
-        'https://res.cloudinary.com/dgiot0v7s/image/upload/v1734033648/image_14_hpux9k.png',
-      categoryEnglish: 'Shrimps',
-      categoryUrdu: '(جھینگ)',
-    },
-    {
-      categoeryImage:
-        'https://res.cloudinary.com/dgiot0v7s/image/upload/v1734136522/Group_218_uatruk.png',
-      categoryEnglish: 'Lobsters & Crabs',
-      categoryUrdu: 'کیکڑے لابسٹر',
-    },
-    {
-      categoeryImage:
-        'https://res.cloudinary.com/dgiot0v7s/image/upload/v1734136517/stock-photo-red-caviar-in-a-circle-isolated-on-white-top-view-1145643794-transformed_1_h2gwoj.png',
-      categoryEnglish: 'Fish Eggs',
-      categoryUrdu: 'مچھلی کے انڈے',
     },
   ];
 
@@ -184,6 +154,10 @@ const HomeScreen = () => {
       ],
     },
   ];
+  
+  useEffect(() => {
+    getFetchData('categorys/getCategorys',setCategoriesList);
+  }, []);
 
   return (
     <SafeAreaView style={styles.safeareaContainer}>
@@ -207,6 +181,7 @@ const HomeScreen = () => {
       </View>
     </SafeAreaView>
   );
+  
 };
 
 export default HomeScreen;

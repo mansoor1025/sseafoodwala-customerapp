@@ -1,10 +1,12 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import ForwardArrow from '../assets/icons/ForwardArrow.svg';
+import { useNavigation } from '@react-navigation/native';
 
-const SettingFeatures = ({feature}) => {
+const SettingFeatures = ({feature,screen}) => {
+  const navigate = useNavigation();
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={()=> navigate.navigate(screen)}>
       <Text style={styles.content}>{feature}</Text>
       <ForwardArrow width={12} height={12} />
     </TouchableOpacity>

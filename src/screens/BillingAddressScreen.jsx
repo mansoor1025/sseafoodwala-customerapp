@@ -10,11 +10,12 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import { SelectList } from 'react-native-dropdown-select-list'
+import { useNavigation } from '@react-navigation/native';
 
 
 const BillingAddressScreen = () => {
   const [selected, setSelected] = useState('');
-
+  const navigate = useNavigation();
   const data = [
     {key: '1', value: 'Karachi'},
     {key: '2', value: 'Hyderabad'},
@@ -94,7 +95,7 @@ const BillingAddressScreen = () => {
             />
           </View>
 
-          <TouchableOpacity style={styles.submitNow}>
+          <TouchableOpacity style={styles.submitNow} onPress={()=> navigate.navigate('PaymentMethod')}>
             <Text style={styles.submitText}>Submit Now</Text>
           </TouchableOpacity>
         </View>

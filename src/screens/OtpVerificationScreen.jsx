@@ -10,8 +10,10 @@ import {
 } from 'react-native';
 import React from 'react';
 import PencilIcon from '../assets/icons/PencilIcon.svg';
+import { useNavigation } from '@react-navigation/native';
 
 const OtpVerificationScreen = () => {
+  const navigate = useNavigation();
   const inputArr = [1, 2, 3, 4];
   return (
     <SafeAreaView style={styles.safeareaContainer}>
@@ -67,7 +69,7 @@ const OtpVerificationScreen = () => {
           <Text style={{color: '#FD8D18'}}>RESEND</Text>{' '}
         </Text>
         
-        <TouchableOpacity style={styles.verifyButton}>
+        <TouchableOpacity style={styles.verifyButton} onPress={()=> navigate.navigate('BillingAddress')}>
           <Text style={styles.verifyText}>Verify & Continue</Text>
         </TouchableOpacity>
       </View>

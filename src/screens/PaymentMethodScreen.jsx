@@ -12,6 +12,7 @@ import React, {useState} from 'react';
 import Header from '../components/Header';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import SelectOnlinePayment from '../components/SelectOnlinePayment';
+import {useNavigation} from '@react-navigation/native';
 
 const PaymentMethodScreen = () => {
   const paymentMethods = [
@@ -69,7 +70,7 @@ const PaymentMethodScreen = () => {
   ];
   const [selectPayment, setSelectPayment] = useState('Debit / Credit Card');
   const [onlinePayment, setOnlinePayment] = useState('');
-
+  const navigate = useNavigation();
   const data = [
     {key: 'Jazz Cash', value: 'Jazz Cash'},
     {key: 'Easypaisa', value: 'Easypaisa'},
@@ -128,7 +129,9 @@ const PaymentMethodScreen = () => {
                 note={true}
               />
             )}
-            <TouchableOpacity style={styles.continueButton}>
+            <TouchableOpacity
+              style={styles.continueButton}
+              onPress={() => navigate.navigate('CardInformation')}>
               <Text style={styles.continueText}>Continue</Text>
             </TouchableOpacity>
           </View>

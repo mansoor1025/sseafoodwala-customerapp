@@ -5,27 +5,33 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import DropDownIcon from '../assets/icons/DropDownIcon.svg';
 import SelectCityModal from './SelectCityModal';
+import {adminApi} from '../services/apiService';
 
 const InputSearchCategory = () => {
-  const cities = [
-    {label: 'Karachi', value: 'karachi'},
-    {label: 'Lahore', value: 'lahore'},
-    {label: 'Islamabad', value: 'islamabad'},
-    {label: 'Rawalpindi', value: 'rawalpindi'},
-    {label: 'Quetta', value: 'quetta'},
-    {label: 'Hyderabad', value: 'hyderabad'},
-    {label: 'Multan', value: 'multan'},
-    {label: 'Sialkot', value: 'sialkot'},
-    {label: 'Gujranwala', value: 'gujranwala'},
-    {label: 'Faisalabad', value: 'faisalabad'},
-  ];
-
+  const [cities, setCities] = useState();
   const [selectCity, setSelectedCity] = useState('Karachi');
   const [isModalVisible, setModalVisible] = useState(false);
+
+  const fetchCities = async () => {
+    try {
+      const response = await adminApi.get('/cities/getCities');
+      const transformCities = response?.data?.map(item => ({
+        label: `${item.city} ${item.isCod ? '(COD)' : '(NON COD)'}`,
+        value: item.city,
+      }));
+      setCities(transformCities);
+    } catch (error) {
+      console.error('Error fetching users:', error);
+    }
+  };
+
+  useEffect(()=>{
+    fetchCities()
+  },[])
 
   return (
     <View style={styles.searchContainer}>

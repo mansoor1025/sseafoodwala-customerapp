@@ -15,21 +15,17 @@ const CategoriesListing = ({categoriesList}) => {
       <View style={{flexDirection: 'row'}}>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           {categoriesList.map(item => (
-            <TouchableOpacity
-              key={item.categoryEnglish}
-              style={styles.categoryContainer}>
+            <TouchableOpacity key={item._id} style={styles.categoryContainer}>
               <View style={styles.categoryImageContainer}>
                 <Image
                   source={{
-                    uri: item.categoeryImage,
+                    uri: item.categoryImage,
                   }}
                   style={styles.categoryImage}
                 />
               </View>
               <View style={styles.fishNameContainer}>
-                <Text style={styles.fishTextEnglish}>
-                  {item.categoryEnglish}
-                </Text>
+                <Text style={styles.fishTextEnglish}>{item.categoryEng}</Text>
                 <Text style={styles.fishUrduText}>{item.categoryUrdu}</Text>
               </View>
             </TouchableOpacity>

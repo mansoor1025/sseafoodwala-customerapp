@@ -21,6 +21,11 @@ import LiveCuttingRequestScreen from './src/screens/LiveCuttingRequestScreen';
 import SessionHistoryScreen from './src/screens/SessionHistoryScreen';
 import FeedBackScreen from './src/screens/FeedBackScreen';
 import TrackOrderScreen from './src/screens/TrackOrderScreen';
+import ProductListScreen from './src/screens/ProductListScreen';
+import ReferralEarn from './src/screens/ReferralEarnScreen';
+import ItemDetailScreen from './src/screens/ItemDetailScreen';
+import AddToCartScreen from './src/screens/AddToCartScreen';
+import CheckoutScreens from './src/screens/CheckoutScreens';
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -29,22 +34,28 @@ const App = () => {
       <Stack.Navigator
         initialState="Login"
         screenOptions={{headerShown: false, animation: 'slide_from_bottom'}}>
+        <Stack.Screen name="Splash" component={SpashScreen} />
+        <Stack.Screen name="OfferIntroScreen" component={OfferIntroScreen} />
+        <Stack.Screen name="FastDelivery" component={FastDeliveryIntroScreen} />
+        <Stack.Screen name="LiveCutting" component={LiveCuttingIntroScreen} />
         <Stack.Screen name="BottomTab" component={BottomTab} />
-        <Stack.Screen name="TrackOrderScreen" component={TrackOrderScreen} />
-        <Stack.Screen name="FeedBack" component={FeedBackScreen} />
-        <Stack.Screen name="SessionHistory" component={SessionHistoryScreen} />
+
+        {/* Home screen routes */}
+        <Stack.Screen name="ProductList" component={ProductListScreen} />
+        <Stack.Screen name="ReferralEarn" component={ReferralEarn} />
+        <Stack.Screen name="ItemDetail" component={ItemDetailScreen} />
+        <Stack.Screen name="CartScreen" component={AddToCartScreen} />
+        <Stack.Screen name="Checkout" component={CheckoutScreens} />
+
+        <Stack.Screen name="Login" component={LoginScreen} />
+
         <Stack.Screen
-          name="LiveCuttingRequest"
-          component={LiveCuttingRequestScreen}
+          name="EnterPhoneNumber"
+          component={EnterPhoneNumberScreen}
         />
-
-        <Stack.Screen name="AccountSetting" component={AccountSettingScreen} />
-
-        <Stack.Screen name="ConfirmOrder" component={ConfirmOrderScreen} />
-
         <Stack.Screen
-          name="CardInformation"
-          component={CardInformationScreen}
+          name="OtpVerification"
+          component={OtpVerificationScreen}
         />
 
         <Stack.Screen name="BillingAddress" component={BillingAddressScreen} />
@@ -52,19 +63,28 @@ const App = () => {
         <Stack.Screen name="PaymentMethod" component={PaymentMethodScreen} />
 
         <Stack.Screen
-          name="OtpVerification"
-          component={OtpVerificationScreen}
+          name="CardInformation"
+          component={CardInformationScreen}
         />
-        <Stack.Screen
-          name="EnterPhoneNumber"
-          component={EnterPhoneNumberScreen}
-        />
-        <Stack.Screen name="Login" component={LoginScreen} />
 
-        <Stack.Screen name="Splash" component={SpashScreen} />
-        <Stack.Screen name="OfferIntroScreen" component={OfferIntroScreen} />
-        <Stack.Screen name="LiveCutting" component={LiveCuttingIntroScreen} />
-        <Stack.Screen name="FastDelivery" component={FastDeliveryIntroScreen} />
+        <Stack.Screen name="ConfirmOrder" component={ConfirmOrderScreen} />
+
+        <Stack.Screen name="AccountSetting" component={AccountSettingScreen} />
+
+        <Stack.Screen
+          name="LiveCuttingRequest"
+          component={LiveCuttingRequestScreen}
+        />
+
+        <Stack.Screen name="FeedBack" component={FeedBackScreen} />
+        <Stack.Screen name="TrackOrderScreen" component={TrackOrderScreen} />
+
+        <Stack.Screen name="SessionHistory" component={SessionHistoryScreen} />
+
+       
+
+        {/* <Stack.Screen name="PaymentMethod" component={PaymentMethodScreen} /> */}
+
         <Stack.Screen name="SelectCity" component={SelectCityScreen} />
       </Stack.Navigator>
     </NavigationContainer>

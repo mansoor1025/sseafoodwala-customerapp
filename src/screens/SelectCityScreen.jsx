@@ -6,26 +6,41 @@ import {
   Text,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import RNPickerSelect from 'react-native-picker-select';
 import AntDesign from 'react-native-vector-icons/dist/AntDesign';
 import {useNavigation} from '@react-navigation/native';
+import {adminApi} from '../services/apiService';
 
 const SelectCityScreen = () => {
   const [selectedCity, setSelectedCity] = useState(null);
-  const cities = [
-    {label: 'Karachi (COD)', value: 'karachi'},
-    {label: 'Lahore (COD)', value: 'lahore'},
-    {label: 'Islamabad (NON COD)', value: 'islamabad'},
-    {label: 'Rawalpindi (NON COD)', value: 'rawalpindi'},
-    {label: 'Quetta (NON COD)', value: 'quetta'},
-    {label: 'Hyderabad (NON COD)', value: 'hyderabad'},
-    {label: 'Multan (NON COD)', value: 'multan'},
-    {label: 'Sialkot (NON COD)', value: 'sialkot'},
-    {label: 'Gujranwala (NON COD)', value: 'gujranwala'},
-    {label: 'Faisalabad (NON COD)', value: 'faisalabad'},
-  ];
+  const [cities, setCities] = useState([]);
+  const [cityValidation, setCityValidation] = useState(false);
   const navigate = useNavigation();
+
+  const fetchCities = async () => {
+    try {
+      const response = await adminApi.get('/cities/getCities');
+      const transformCities = response?.data?.map(item => ({
+        label: `${item.city} ${item.isCod ? '(COD)' : '(NON COD)'}`,
+        value: item.city,
+      }));
+      setCities(transformCities);
+    } catch (error) {
+      console.error('Error fetching users:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCities();
+  }, []);
+
+  const homeContinue = () => {
+    if (!selectedCity) {
+      setCityValidation(true);
+    }
+    navigate.navigate('BottomTab');
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -43,7 +58,9 @@ const SelectCityScreen = () => {
           <Text style={{color: '#1C1C1C'}}>{'\n'}catch!</Text>
         </Text>
 
-        <View style={styles.selectList}>
+        <TouchableOpacity
+          style={styles.selectList}
+          onPress={() => console.log('hello')}>
           <RNPickerSelect
             onValueChange={value => setSelectedCity(value)}
             items={cities}
@@ -54,11 +71,14 @@ const SelectCityScreen = () => {
               color: '#000000',
             }}
           />
-        </View>
+        </TouchableOpacity>
+        {cityValidation && (
+          <Text style={styles.cityValidation}>City is required</Text>
+        )}
 
         <TouchableOpacity
           style={styles.getStartedButton}
-          onPress={() => navigate.navigate('BottomTab')}>
+          onPress={() => homeContinue()}>
           <Text style={styles.getStartedText}>Continue</Text>
           <AntDesign
             name={'arrowright'}
@@ -122,13 +142,22 @@ const styles = StyleSheet.create({
   arrowStyle: {
     paddingHorizontal: 10,
   },
+
+  cityValidation: {
+    paddingVertical: 5,
+    paddingHorizontal: 5,
+    fontFamily: 'InstrumentSans-Regular',
+    fontWeight: '500',
+    color: 'red',
+    fontSize: 14,
+  },
 });
 
 const pickerSelectStyles = StyleSheet.create({
   inputIOS: {
     height: 50,
     fontSize: 16,
-    paddingVertical: 12,
+    paddingVertical: 8,
     paddingHorizontal: 10,
     borderWidth: 1,
     borderColor: '#D7D7D7',
@@ -137,6 +166,7 @@ const pickerSelectStyles = StyleSheet.create({
     backgroundColor: '#F4FDFF',
     paddingRight: 30, // To ensure text is not cut off
   },
+
   inputAndroid: {
     height: 50,
     fontSize: 16,

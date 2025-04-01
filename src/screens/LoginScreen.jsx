@@ -10,8 +10,10 @@ import {
 import React from 'react';
 import FacebookIcon from '../assets/icons/Facebook.svg';
 import GoogleIcon from '../assets/icons/GoogleIcon.svg';
+import { useNavigation } from '@react-navigation/native';
 
 const LoginScreen = () => {
+  const  navigate = useNavigation();
   return (
     <SafeAreaView style={styles.safeareaContainer}>
       <StatusBar
@@ -30,7 +32,7 @@ const LoginScreen = () => {
         <Text style={styles.preferredLogin}>
           Choose your preferred login method to continue.
         </Text>
-        <TouchableOpacity style={styles.phoneNumberContinueButton}>
+        <TouchableOpacity style={styles.phoneNumberContinueButton} onPress={()=> navigate.navigate('EnterPhoneNumber')}>
           <Text style={styles.phoneNumberText}>Continue With Phone Number</Text>
         </TouchableOpacity>
 

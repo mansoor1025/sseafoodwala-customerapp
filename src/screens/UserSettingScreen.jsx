@@ -49,7 +49,7 @@ const UserSettingScreen = () => {
           </View>
 
           <View style={styles.settingFeatures}>
-            <SettingFeatures feature={'Account Setting'} />
+            <SettingFeatures feature={'Account Setting'} screen={'AccountSetting'} />
             <SettingFeatures feature={'Privacy and Policy'} />
             <SettingFeatures feature={'Refund Policy'} />
             <SettingFeatures feature={'Terms & Conditions'} />

@@ -16,6 +16,7 @@ import MapIcon from '../assets/icons/MapIcon.svg';
 import OrderSummaryIcon from '../assets/icons/OrderSummaryIcon.svg';
 import ToggleSwitch from 'toggle-switch-react-native';
 import ItemCards from '../components/ItemCards';
+import { useNavigation } from '@react-navigation/native';
 
 const CheckoutScreens = () => {
   const [isOn, setIsOn] = useState(false);
@@ -80,7 +81,7 @@ const CheckoutScreens = () => {
       price: 900,
     },
   ];
-
+  const navigate = useNavigation()
   const handleTermsPress = () => {
     Alert.alert('Terms & Conditions', 'Redirecting to Terms & Conditions...');
     // Navigate to the terms & conditions page if needed
@@ -235,11 +236,11 @@ const CheckoutScreens = () => {
               </Text>
             </View>
 
-            <TouchableOpacity style={styles.processCheckoutButton}>
+            <TouchableOpacity style={styles.processCheckoutButton} onPress={()=> navigate.navigate('Login')}>
               <Text style={styles.checkoutText}>Process to Checkout</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.continueShoppingButton}>
+            <TouchableOpacity style={styles.continueShoppingButton} onPress={()=> navigate.navigate('BottomTab')}>
               <Text style={styles.shoppingText}>Continue Shopping</Text>
             </TouchableOpacity>
           </View>
