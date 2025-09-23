@@ -18,10 +18,12 @@ const InputSearchCategory = () => {
 
   const fetchCities = async () => {
     try {
+      console.log('Full API URL:', adminApi.defaults.baseURL + '/cities/getCities');
+
       const response = await adminApi.get('/cities/getCities');
-      const transformCities = response?.data?.map(item => ({
-        label: `${item.city} ${item.isCod ? '(COD)' : '(NON COD)'}`,
-        value: item.city,
+      const transformCities = response?.data?.data?.map(item => ({
+        label: `${item.name} ${item.cod ? '(COD)' : '(NON COD)'}`,
+        value: item.id,
       }));
       setCities(transformCities);
     } catch (error) {
@@ -29,9 +31,9 @@ const InputSearchCategory = () => {
     }
   };
 
-  useEffect(()=>{
-    fetchCities()
-  },[])
+  useEffect(() => {
+    fetchCities();
+  }, []);
 
   return (
     <View style={styles.searchContainer}>

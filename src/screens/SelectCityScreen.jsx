@@ -21,9 +21,9 @@ const SelectCityScreen = () => {
   const fetchCities = async () => {
     try {
       const response = await adminApi.get('/cities/getCities');
-      const transformCities = response?.data?.map(item => ({
-        label: `${item.city} ${item.isCod ? '(COD)' : '(NON COD)'}`,
-        value: item.city,
+      const transformCities = response?.data.data?.map(item => ({
+        label: `${item.name} ${item.cod ? '(COD)' : '(NON COD)'}`,
+        value: item.id,
       }));
       setCities(transformCities);
     } catch (error) {
@@ -36,10 +36,13 @@ const SelectCityScreen = () => {
   }, []);
 
   const homeContinue = () => {
-    if (!selectedCity) {
+    
+    if (selectedCity) {
+      setCityValidation(false);
+      // navigate.navigate('BottomTab');
+    } else {
       setCityValidation(true);
     }
-    navigate.navigate('BottomTab');
   };
 
   return (
@@ -60,9 +63,11 @@ const SelectCityScreen = () => {
 
         <TouchableOpacity
           style={styles.selectList}
-          onPress={() => console.log('hello')}>
+          onPress={() => homeContinue()}>
           <RNPickerSelect
-            onValueChange={value => setSelectedCity(value)}
+            onValueChange={value => {
+              setSelectedCity(value);
+            }}
             items={cities}
             style={pickerSelectStyles}
             placeholder={{
@@ -72,7 +77,8 @@ const SelectCityScreen = () => {
             }}
           />
         </TouchableOpacity>
-        {cityValidation && (
+        
+        {!selectedCity && cityValidation && (
           <Text style={styles.cityValidation}>City is required</Text>
         )}
 
@@ -149,7 +155,8 @@ const styles = StyleSheet.create({
     fontFamily: 'InstrumentSans-Regular',
     fontWeight: '500',
     color: 'red',
-    fontSize: 14,
+    fontSize: 16,
+    marginTop: 5,
   },
 });
 
