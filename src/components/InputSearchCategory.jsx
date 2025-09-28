@@ -11,9 +11,9 @@ import DropDownIcon from '../assets/icons/DropDownIcon.svg';
 import SelectCityModal from './SelectCityModal';
 import {adminApi} from '../services/apiService';
 
-const InputSearchCategory = () => {
+const InputSearchCategory = ({city}) => {
   const [cities, setCities] = useState();
-  const [selectCity, setSelectedCity] = useState('Karachi');
+  const [selectCity, setSelectedCity] = useState(city);
   const [isModalVisible, setModalVisible] = useState(false);
 
   const fetchCities = async () => {
@@ -23,7 +23,7 @@ const InputSearchCategory = () => {
       const response = await adminApi.get('/cities/getCities');
       const transformCities = response?.data?.data?.map(item => ({
         label: `${item.name} ${item.cod ? '(COD)' : '(NON COD)'}`,
-        value: item.id,
+        value: item.name,
       }));
       setCities(transformCities);
     } catch (error) {

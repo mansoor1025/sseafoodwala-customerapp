@@ -13,18 +13,20 @@ import HomeIcon from '../assets/icons/HomeIcon.svg';
 import NotificationIcon from '../assets/icons/notificationIcon.svg';
 import UserSettingIcon from '../assets/icons/userSettingIcon.svg';
 import {Dimensions} from 'react-native';
-import Icon from '../components/Icons'; 
+import Icon from '../components/Icons';
 import ReferralEarn from '../screens/ReferralEarnScreen';
 import HomeStack from './HomeStack';
 import CartStack from './CartStack';
 import NotificationScreen from '../screens/NotificationScreen';
 import UserSettingScreen from '../screens/UserSettingScreen';
 
-const screenWidth = Dimensions.get('window').width; 
+const screenWidth = Dimensions.get('window').width;
 
 const Tab = createBottomTabNavigator();
 
 const BottomTab = ({route}) => {
+  const {city} = route.params || {};
+  console.log('city(((((((((((((', city);
   return (
     <Tab.Navigator
       initialRouteName="Home"
@@ -75,6 +77,7 @@ const BottomTab = ({route}) => {
       <Tab.Screen
         name="Home"
         component={HomeScreen}
+        initialParams={{ city }}
         options={{
           tabBarIcon: ({focused, color, size}) => (
             <View style={styles.iconStyles}>

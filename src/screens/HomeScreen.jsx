@@ -13,9 +13,12 @@ import Banner from '../components/Banner';
 import EarnRewards from '../components/EarnRewards';
 import CategoriesListing from '../components/CategoriesListing';
 import ProductListing from '../components/ProductListing';
-import { getFetchData } from '../services/helper/helper';
+import {getFetchData} from '../services/helper/helper';
 
-const HomeScreen = () => {
+const HomeScreen = ({route}) => {
+  const {city} = route.params || {};
+  console.log('city(((((((((((((', city);
+
   const [categoriesList, setCategoriesList] = useState([]);
 
   const bannersList = [
@@ -154,9 +157,9 @@ const HomeScreen = () => {
       ],
     },
   ];
-  
+
   useEffect(() => {
-    getFetchData('categorys/getCategorys',setCategoriesList);
+    getFetchData('seaFoodCategory/getSeaFoodCategory', setCategoriesList);
   }, []);
 
   return (
@@ -170,7 +173,7 @@ const HomeScreen = () => {
       <View style={styles.container}>
         <HomeHeader />
         <ScrollView showsVerticalScrollIndicator={false}>
-          <InputSearchCategory />
+          <InputSearchCategory city={city} />
           <Banner bannersList={bannersList} />
           <EarnRewards />
           <CategoriesListing categoriesList={categoriesList} />
@@ -181,7 +184,6 @@ const HomeScreen = () => {
       </View>
     </SafeAreaView>
   );
-  
 };
 
 export default HomeScreen;

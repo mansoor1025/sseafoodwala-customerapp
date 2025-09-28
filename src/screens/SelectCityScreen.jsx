@@ -23,7 +23,7 @@ const SelectCityScreen = () => {
       const response = await adminApi.get('/cities/getCities');
       const transformCities = response?.data.data?.map(item => ({
         label: `${item.name} ${item.cod ? '(COD)' : '(NON COD)'}`,
-        value: item.id,
+        value: item.name,
       }));
       setCities(transformCities);
     } catch (error) {
@@ -35,11 +35,12 @@ const SelectCityScreen = () => {
     fetchCities();
   }, []);
 
-  const homeContinue = () => {
-    
+  const homeContinue = (flag = false) => {
     if (selectedCity) {
+      console.log('selectedCity((((((', selectedCity);
+
       setCityValidation(false);
-      // navigate.navigate('BottomTab');
+      flag && navigate.navigate('BottomTab', {city: selectedCity});
     } else {
       setCityValidation(true);
     }
@@ -77,14 +78,14 @@ const SelectCityScreen = () => {
             }}
           />
         </TouchableOpacity>
-        
+
         {!selectedCity && cityValidation && (
           <Text style={styles.cityValidation}>City is required</Text>
         )}
 
         <TouchableOpacity
           style={styles.getStartedButton}
-          onPress={() => homeContinue()}>
+          onPress={() => homeContinue(true)}>
           <Text style={styles.getStartedText}>Continue</Text>
           <AntDesign
             name={'arrowright'}

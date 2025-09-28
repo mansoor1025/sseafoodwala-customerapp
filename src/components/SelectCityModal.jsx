@@ -27,13 +27,26 @@ const SelectCityModal = ({
         <View style={styles.modalContent}>
           <SelectList
             setSelected={val => {
-              setSelectedCity(val), setModalVisible(false);
+              setSelectedCity(val);
+              setModalVisible(false);
             }}
-            data={cities}
-            save="City"
+            data={
+              cities?.length
+                ? cities.map(city => ({
+                    key: city.value, // keep id as key (for uniqueness)
+                    value: city.label, // 👈 SelectList will now return the label
+                  }))
+                : [{key: 0, value: 'No cities available'}]
+            }
             placeholder="Select City"
             boxStyles={styles.selectCity}
             fontFamily={'InstrumentSans-Regular'}
+            searchinputStyles={{
+              color: 'rgba(0, 0, 0, 0.4)',
+            }}
+            inputStyles={{
+              color: 'rgba(0, 0, 0, 0.4)',
+            }}
           />
         </View>
       </View>

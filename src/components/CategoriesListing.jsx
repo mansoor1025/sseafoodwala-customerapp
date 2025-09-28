@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React from 'react';
+import {imageUrlWrapper} from '../services/helper/helper';
 
 const CategoriesListing = ({categoriesList}) => {
   return (
@@ -14,19 +15,19 @@ const CategoriesListing = ({categoriesList}) => {
       <Text style={styles.categoryText}>Categories</Text>
       <View style={{flexDirection: 'row'}}>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          {categoriesList.map(item => (
-            <TouchableOpacity key={item._id} style={styles.categoryContainer}>
+          {categoriesList?.map(item => (
+            <TouchableOpacity key={item.id} style={styles.categoryContainer}>
               <View style={styles.categoryImageContainer}>
                 <Image
                   source={{
-                    uri: item.categoryImage,
+                    uri: imageUrlWrapper(item.catImage),
                   }}
                   style={styles.categoryImage}
                 />
               </View>
               <View style={styles.fishNameContainer}>
-                <Text style={styles.fishTextEnglish}>{item.categoryEng}</Text>
-                <Text style={styles.fishUrduText}>{item.categoryUrdu}</Text>
+                <Text style={styles.fishTextEnglish}>{item.catName}</Text>
+                <Text style={styles.fishUrduText}>{item.catUrduName}</Text>
               </View>
             </TouchableOpacity>
           ))}
