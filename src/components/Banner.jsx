@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
+import {imageUrlWrapper} from '../services/helper/helper';
 
 const Banner = ({bannersList}) => {
   const naviagte = useNavigation();
@@ -17,23 +18,24 @@ const Banner = ({bannersList}) => {
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
         {bannersList.map(item => (
           <TouchableOpacity
-            key={item.bannerText}
+            key={item.id}
             style={styles.bannerContainer}
             onPress={() =>
               naviagte.navigate('ProductList', {
-                headerTitle: item.bannerText,
+                productDetails: item.products,
+                headerTitle: item.name,
               })
             }>
             <Image
               source={{
-                uri: item.bannerImage,
+                uri: imageUrlWrapper(item.bannerImage),
               }}
               style={styles.bannerImage}
               onError={() =>
                 console.error('Image failed to load: ', item.bannerImage)
               }
             />
-            <Text style={styles.bannerText}>{item.bannerText}</Text>
+            <Text style={styles.bannerText}>{item.name}</Text>
           </TouchableOpacity>
         ))}
       </ScrollView>

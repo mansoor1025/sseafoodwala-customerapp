@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import {useNavigation} from '@react-navigation/native';
+import {imageUrlWrapper} from '../services/helper/helper';
 
 const ItemCards = ({item}) => {
   const navigate = useNavigation();
@@ -15,7 +16,7 @@ const ItemCards = ({item}) => {
       <View>
         <Image
           source={{
-            uri: item.itemImage,
+            uri: imageUrlWrapper(item.productImage),
           }}
           style={styles.cardImage}
         />
@@ -23,8 +24,8 @@ const ItemCards = ({item}) => {
       <View style={styles.itemContentContainer}>
         <View style={styles.nameStockUpdatesContainer}>
           <View>
-            <Text style={styles.fishEnglishName}>{item.fishEnglishName}</Text>
-            <Text style={styles.fishUrduName}>{item.fishUrduName}</Text>
+            <Text style={styles.fishEnglishName}>{item.name}</Text>
+            <Text style={styles.fishUrduName}>{item.urduName}</Text>
           </View>
 
           <Text style={styles.stockText}>In Stock</Text>

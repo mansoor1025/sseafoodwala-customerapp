@@ -17,27 +17,28 @@ import {getFetchData} from '../services/helper/helper';
 
 const HomeScreen = ({route}) => {
   const {city} = route.params || {};
-  console.log('city(((((((((((((', city);
 
   const [categoriesList, setCategoriesList] = useState([]);
+  const [bannersList, setbannersList] = useState([]);
+  const [sectionList, setSectionList] = useState([]);
 
-  const bannersList = [
-    {
-      bannerImage:
-        'https://res.cloudinary.com/dgiot0v7s/image/upload/v1734024060/Banner_poondb.png',
-      bannerText: 'Fresh Catch',
-    },
-    {
-      bannerImage:
-        'https://res.cloudinary.com/dgiot0v7s/image/upload/v1734025501/Banner_1_bnbiju.png',
-      bannerText: 'Special Offer',
-    },
-    {
-      bannerImage:
-        'https://res.cloudinary.com/dgiot0v7s/image/upload/v1734024060/Banner_poondb.png',
-      bannerText: 'Fresh Fish',
-    },
-  ];
+  // const bannersList = [
+  //   {
+  //     bannerImage:
+  //       'https://res.cloudinary.com/dgiot0v7s/image/upload/v1734024060/Banner_poondb.png',
+  //     bannerText: 'Fresh Catch',
+  //   },
+  //   {
+  //     bannerImage:
+  //       'https://res.cloudinary.com/dgiot0v7s/image/upload/v1734025501/Banner_1_bnbiju.png',
+  //     bannerText: 'Special Offer',
+  //   },
+  //   {
+  //     bannerImage:
+  //       'https://res.cloudinary.com/dgiot0v7s/image/upload/v1734024060/Banner_poondb.png',
+  //     bannerText: 'Fresh Fish',
+  //   },
+  // ];
 
   const dealItemLists = [
     {
@@ -160,6 +161,8 @@ const HomeScreen = ({route}) => {
 
   useEffect(() => {
     getFetchData('seaFoodCategory/getSeaFoodCategory', setCategoriesList);
+    getFetchData('banners/getBanners', setbannersList);
+    getFetchData('section/getSections', setSectionList);
   }, []);
 
   return (
@@ -177,7 +180,7 @@ const HomeScreen = ({route}) => {
           <Banner bannersList={bannersList} />
           <EarnRewards />
           <CategoriesListing categoriesList={categoriesList} />
-          {dealItemLists.map(item => (
+          {sectionList.map(item => (
             <ProductListing key={item.title} item={item} />
           ))}
         </ScrollView>

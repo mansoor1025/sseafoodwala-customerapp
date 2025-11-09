@@ -18,8 +18,6 @@ const InputSearchCategory = ({city}) => {
 
   const fetchCities = async () => {
     try {
-      console.log('Full API URL:', adminApi.defaults.baseURL + '/cities/getCities');
-
       const response = await adminApi.get('/cities/getCities');
       const transformCities = response?.data?.data?.map(item => ({
         label: `${item.name} ${item.cod ? '(COD)' : '(NON COD)'}`,

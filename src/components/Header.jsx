@@ -11,8 +11,6 @@ const Header = ({title, navigationScreen}) => {
   const goBackToPreviousScreen = () => {
     navigate.goBack();
   };
-
-  console.log("currentScreenName******",currentScreenName);
   
   return (
     <View style={styles.container}>

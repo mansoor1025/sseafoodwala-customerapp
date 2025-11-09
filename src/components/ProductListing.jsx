@@ -5,11 +5,11 @@ import ItemCards from './ItemCards';
 const ProductListing = ({item}) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{item.title}</Text>
-      <Text style={styles.description}>{item.description}</Text>
+      <Text style={styles.title}>{item.name}</Text>
+      <Text style={styles.description}>{item.title}</Text>
       <View style={styles.itemContainer}>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          {item.items.map(item => (
+          {item.products.map(item => (
             <ItemCards key={item.id} item={item} />
           ))}
         </ScrollView>

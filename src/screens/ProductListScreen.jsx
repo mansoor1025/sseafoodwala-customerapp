@@ -17,7 +17,7 @@ import ItemCards from '../components/ItemCards';
 
 const ProductListScreen = () => {
   const route = useRoute();
-  const {headerTitle} = route.params;
+  const {productDetails, headerTitle} = route.params;
 
   const itemCards = [
     {
@@ -115,7 +115,7 @@ const ProductListScreen = () => {
 
           <View style={styles.productListing}>
             <FlatList
-              data={itemCards}
+              data={productDetails}
               renderItem={item => <ItemCards item={item.item} />}
               keyExtractor={item => item.id}
               numColumns={3}

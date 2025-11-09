@@ -26,7 +26,6 @@ const Tab = createBottomTabNavigator();
 
 const BottomTab = ({route}) => {
   const {city} = route.params || {};
-  console.log('city(((((((((((((', city);
   return (
     <Tab.Navigator
       initialRouteName="Home"

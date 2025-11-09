@@ -37,8 +37,6 @@ const SelectCityScreen = () => {
 
   const homeContinue = (flag = false) => {
     if (selectedCity) {
-      console.log('selectedCity((((((', selectedCity);
-
       setCityValidation(false);
       flag && navigate.navigate('BottomTab', {city: selectedCity});
     } else {
