@@ -7,16 +7,25 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React from 'react';
-import {imageUrlWrapper} from '../services/helper/helper';
+import { getFetchData, imageUrlWrapper } from '../services/helper/helper';
+import { useNavigation } from '@react-navigation/native';
 
-const CategoriesListing = ({categoriesList}) => {
+
+const CategoriesListing = ({ categoriesList }) => {
+  const navigate = useNavigation();
+  const getProductsViaCategory = async (id, catName) => {
+    console.log(id)
+    const productData = await getFetchData(`/category/productListingViaCategory?id=${id}`, false, true);
+    navigate.navigate('ProductList', { "productDetails": productData, "headerTitle": catName })
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.categoryText}>Categories</Text>
-      <View style={{flexDirection: 'row'}}>
+      <View style={{ flexDirection: 'row' }}>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           {categoriesList?.map(item => (
-            <TouchableOpacity key={item.id} style={styles.categoryContainer}>
+            <TouchableOpacity key={item.id} style={styles.categoryContainer} onPress={() => getProductsViaCategory(item.id, item.catName)}>
               <View style={styles.categoryImageContainer}>
                 <Image
                   source={{
@@ -37,12 +46,12 @@ const CategoriesListing = ({categoriesList}) => {
         <TouchableOpacity
           style={[
             styles.slideBar,
-            {backgroundColor: '#FD8D1F'},
+            { backgroundColor: '#FD8D1F' },
           ]}></TouchableOpacity>
         <TouchableOpacity
           style={[
             styles.slideBar,
-            {backgroundColor: 'rgba(253, 141, 31, 0.3)'},
+            { backgroundColor: 'rgba(253, 141, 31, 0.3)' },
           ]}></TouchableOpacity>
       </View>
     </View>
@@ -65,8 +74,6 @@ const styles = StyleSheet.create({
 
   categoryContainer: {
     marginTop: 10,
-    width: 109,
-    height: 'auto',
     borderRadius: 5,
     borderColor: '#d3d3d3', // Light grey border color
     backgroundColor: '#ffffff', // Solid background color for better shadow effect

@@ -9,7 +9,7 @@ import React, {useEffect, useState} from 'react';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import DropDownIcon from '../assets/icons/DropDownIcon.svg';
 import SelectCityModal from './SelectCityModal';
-import {adminApi} from '../services/apiService';
+import {adminApi} from '../services/adminApiService';
 
 const InputSearchCategory = ({city}) => {
   const [cities, setCities] = useState();

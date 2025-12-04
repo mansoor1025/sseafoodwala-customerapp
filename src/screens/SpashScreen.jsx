@@ -6,14 +6,15 @@ import {
   StatusBar,
   Image,
 } from 'react-native';
-import React, {useEffect} from 'react';
-import {useNavigation} from '@react-navigation/native';
-import LinearGradient from 'react-native-linear-gradient';
+import React, { useEffect } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { configureGoogleSignIn } from '../services/googleSignIn';
 
 const SpashScreen = () => {
   const navigation = useNavigation();
 
   useEffect(() => {
+    configureGoogleSignIn();
     // Navigate to "Introduction" after 3 seconds
     const timer = setTimeout(() => {
       navigation.navigate('OfferIntroScreen'); // Replace 'Introduction' with the name of your target screen

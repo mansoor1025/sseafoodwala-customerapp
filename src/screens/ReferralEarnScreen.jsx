@@ -14,10 +14,19 @@ import WhatsappIcon from '../assets/icons/WhatsappIcon.svg';
 import MessageIcon from '../assets/icons/MessageIcon.svg';
 import EmailIcon from '../assets/icons/EmailIcon.svg';
 import ShareIcon from '../assets/icons/ShareIcon.svg';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
+import { useAuthStore } from '../store/useAuthStore';
 
 const ReferralEarn = () => {
   const navigate = useNavigation();
+  const userSession = useAuthStore((s) => s.user);
+  const navScreen = !userSession && !userSession?.phonenumber ? "Login" : null
+ 
+  const sentReferral = (screen) => {
+    if (screen)
+      navigate.navigate(screen)
+  }
+
   return (
     <SafeAreaView style={styles.safeareaContainer}>
       <StatusBar
@@ -36,15 +45,15 @@ const ReferralEarn = () => {
           <Text style={styles.inviteText}>Invite your friends to enjoy</Text>
           <Text style={styles.freshText}>fresh seafood!</Text>
           <Text style={styles.discountText}>
-            <Text style={{color: 'rgba(0, 0, 0, 0.7)'}}>They get </Text>
-            <Text style={{color: 'rgba(253, 141, 24, 0.7)'}}>10% off </Text>
-            <Text style={{color: 'rgba(0, 0, 0, 0.7)'}}>
+            <Text style={{ color: 'rgba(0, 0, 0, 0.7)' }}>They get </Text>
+            <Text style={{ color: 'rgba(253, 141, 24, 0.7)' }}>10% off </Text>
+            <Text style={{ color: 'rgba(0, 0, 0, 0.7)' }}>
               their first order, and you get{' '}
             </Text>
-            <Text style={{color: 'rgba(253, 141, 24, 0.7)'}}>
+            <Text style={{ color: 'rgba(253, 141, 24, 0.7)' }}>
               {'\n'} 20% off{' '}
             </Text>
-            <Text style={{color: 'rgba(0, 0, 0, 0.7)'}}>your next!</Text>
+            <Text style={{ color: 'rgba(0, 0, 0, 0.7)' }}>your next!</Text>
           </Text>
 
           <View style={styles.promoCode}>
@@ -55,7 +64,7 @@ const ReferralEarn = () => {
           </View>
         </View>
         <View style={styles.shareIconsContainer}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => sentReferral(navScreen)}>
             <WhatsappIcon width={20} height={20} />
           </TouchableOpacity>
           <TouchableOpacity>

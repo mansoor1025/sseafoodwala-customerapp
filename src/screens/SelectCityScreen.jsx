@@ -10,7 +10,7 @@ import React, {useEffect, useState} from 'react';
 import RNPickerSelect from 'react-native-picker-select';
 import AntDesign from 'react-native-vector-icons/dist/AntDesign';
 import {useNavigation} from '@react-navigation/native';
-import {adminApi} from '../services/apiService';
+import {adminApi} from '../services/adminApiService';
 
 const SelectCityScreen = () => {
   const [selectedCity, setSelectedCity] = useState(null);

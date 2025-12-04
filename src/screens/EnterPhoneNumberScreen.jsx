@@ -8,11 +8,80 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import { customerApiService } from '../services/customerApiService';
 
 const EnterPhoneNumberScreen = () => {
+  const [phonenumber, setPhonenumber] = useState("")
+  const [phonenumberError, setPhonenumberError] = useState(null)
+  const [countdown, setCountdown] = useState(0);
+  const intervalRef = useRef(null);
+  const [isDisabled, setIsDisabled] = useState(false);
+
+  useEffect(() => {
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, []);
+
+  const startCountdown = () => {
+    // avoid multiple intervals
+    if (intervalRef.current) return;
+
+    setCountdown(300); // 5 minutes
+
+    intervalRef.current = setInterval(() => {
+      setCountdown(prev => {
+        if (prev <= 1) {
+          clearInterval(intervalRef.current);
+          intervalRef.current = null;
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+  };
+
   const navigate = useNavigation();
+  const sentOtp = async () => {
+    try {
+      setPhonenumberError(null);
+      console.log("otp func is calling ");
+      console.log("phonenumber*******", phonenumber);
+      // Remove starting 0 if exists
+      let formattedNumber = phonenumber.startsWith("0")
+        ? phonenumber.slice(1)
+        : phonenumber;
+
+      // Validate length
+      if (formattedNumber.length !== 10) {
+        setPhonenumberError("Number must be 10 digits");
+        return;
+      }
+
+      // Add country code if needed (for Pakistan +92)
+      formattedNumber = "92" + formattedNumber;
+      console.log("Formatted number:", formattedNumber);
+
+      const response = await customerApiService.post('/sentOtp', { phonenumber: formattedNumber });
+      console.log("response******", response?.data);
+
+      navigate.navigate('OtpVerification', { formattedNumber })
+    } catch (error) {
+      setPhonenumberError(error?.response?.data?.message)
+      startCountdown()
+      setIsDisabled(true); // disable button
+      // Re-enable button when countdown finishes
+      setTimeout(() => {
+        setIsDisabled(false);
+      }, 300000); // 5 minutes
+      console.log("error ***********", error?.response?.data?.message);
+    }
+  }
+  
   return (
     <SafeAreaView style={styles.safeareaContainer}>
       <StatusBar
@@ -41,20 +110,38 @@ const EnterPhoneNumberScreen = () => {
             placeholder="3330246433"
             placeholderTextColor={'rgba(0, 0, 0, 0.6)'}
             style={styles.textInput}
+            value={phonenumber}
+            onChangeText={text => setPhonenumber(text)} // update state on change
+            keyboardType="phone-pad" // optional, for numeric keypad
           />
         </View>
-        <Text style={styles.phonenumberValidationText}>
-          <Text style={{color: 'rgba(0, 0, 0, 0.5)'}}>
-            Phone Number Validation{' '}
-          </Text>
-          <Text style={{color: '#FD8D1F'}}>Error</Text>
-        </Text>
+        {phonenumberError &&
+          <Text style={styles.phonenumberValidationText}>
+            <Text style={{ color: 'rgba(0, 0, 0, 0.5)' }}>
+              {phonenumberError}{' '}
+            </Text>
 
-        <TouchableOpacity style={styles.getOtpCodeButton} activeOpacity={0.7} onPress={()=> navigate.navigate('OtpVerification')}>
+            {countdown > 0 && (
+              <Text style={{ color: '#FD8D1F' }}>
+                ({Math.floor(countdown / 60)}:{String(countdown % 60).padStart(2, '0')})
+              </Text>
+            )}
+
+          </Text>
+        }
+        <TouchableOpacity
+          style={[
+            styles.getOtpCodeButton,
+            isDisabled && { opacity: 0.5 }  // UI change
+          ]}
+          activeOpacity={0.7}
+          onPress={() => !isDisabled && sentOtp()}  // stop press
+          disabled={isDisabled}  // disable touch
+        >
           <Text style={styles.getOtpText}>Get OTP Code</Text>
         </TouchableOpacity>
       </View>
-    </SafeAreaView>
+    </SafeAreaView >
   );
 };
 

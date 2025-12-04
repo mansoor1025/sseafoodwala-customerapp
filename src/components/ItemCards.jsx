@@ -1,18 +1,19 @@
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React, {useState} from 'react';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React, { useState } from 'react';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
-import {useNavigation} from '@react-navigation/native';
-import {imageUrlWrapper} from '../services/helper/helper';
+import { useNavigation } from '@react-navigation/native';
+import { imageUrlWrapper } from '../services/helper/helper';
 
-const ItemCards = ({item}) => {
+const ItemCards = ({ item }) => {
   const navigate = useNavigation();
   const [count, setCount] = useState(5);
   const stars = [1, 2, 3, 4, 5];
+  // navigate.navigate('ProductList', { "productDetails": productData, "headerTitle": catName })
   return (
     <TouchableOpacity
       style={styles.itemCardContainer}
-      onPress={() => navigate.navigate('ItemDetail')}>
+      onPress={() => navigate.navigate('ItemDetail', { item })}>
       <View>
         <Image
           source={{
@@ -21,13 +22,11 @@ const ItemCards = ({item}) => {
           style={styles.cardImage}
         />
       </View>
-      <View style={styles.itemContentContainer}>
-        <View style={styles.nameStockUpdatesContainer}>
-          <View>
-            <Text style={styles.fishEnglishName}>{item.name}</Text>
-            <Text style={styles.fishUrduName}>{item.urduName}</Text>
-          </View>
 
+      <View style={styles.itemContentContainer}>
+        <Text style={styles.fishEnglishName}>{item.name}</Text>
+        <View style={styles.nameStockUpdatesContainer}>
+          <Text style={styles.fishUrduName}>{item.urduName}</Text>
           <Text style={styles.stockText}>In Stock</Text>
         </View>
 
@@ -47,10 +46,10 @@ const ItemCards = ({item}) => {
         <View style={styles.priceweightContainer}>
           <Text style={styles.pricePerKg}>Price Per KG:</Text>
           <Text style={styles.priceStyle}>
-            <Text style={{fontFamily: 'InstrumentSans-Medium'}}>
+            <Text style={{ fontFamily: 'InstrumentSans-Medium' }}>
               {item.price}{' '}
             </Text>
-            <Text style={{fontFamily: 'InstrumentSans-SemiBold'}}>PKR</Text>
+            <Text style={{ fontFamily: 'InstrumentSans-SemiBold' }}>PKR</Text>
           </Text>
         </View>
 
@@ -91,8 +90,6 @@ export default ItemCards;
 
 const styles = StyleSheet.create({
   itemCardContainer: {
-    width: 108,
-    height: 195,
     borderRadius: 7,
     borderColor: '#d3d3d3', // Light grey border color
     backgroundColor: '#ffffff', // Solid background color for better shadow effect
@@ -104,7 +101,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1, // Lower opacity for a subtle effect
     shadowRadius: 4, // Increases the blur to push shadow further
     elevation: 5, // Adds shadow for Android
-    marginHorizontal: 5,
     overflow: 'visible', // Ensures shadow is rendered outside the bo
     marginHorizontal: 5,
     marginBottom: 10,

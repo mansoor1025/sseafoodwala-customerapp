@@ -9,15 +9,19 @@ import {
   ScrollView,
   FlatList,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Header from '../components/Header';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import ToggleSwitch from 'toggle-switch-react-native';
 import ItemCards from '../components/ItemCards';
 import { useNavigation } from '@react-navigation/native';
+import { imageUrlWrapper } from '../services/helper/helper';
 
-const ItemDetailScreen = () => {
+const ItemDetailScreen = ({ route }) => {
+  const { item } = route.params || {};
+  console.log("item***********", item);
+
   const stars = [1, 2, 3, 4, 5];
   const [count, setCount] = useState(5);
   const [isOn, setIsOn] = useState(false);
@@ -97,7 +101,7 @@ const ItemDetailScreen = () => {
           <View style={styles.imageContainer}>
             <Image
               source={{
-                uri: 'https://res.cloudinary.com/dgiot0v7s/image/upload/v1734278121/Image_11_bfj6wk.png',
+                uri: imageUrlWrapper(item?.productImage),
               }}
               style={styles.bgImage}
             />
@@ -105,9 +109,9 @@ const ItemDetailScreen = () => {
 
           <View style={styles.content}>
             <View style={styles.contentDataContainer}>
-              <Text style={{color: 'rgba(0, 0, 0, 0.8)'}}>
-                <Text style={styles.fishEngText}>Surmai </Text>
-                <Text style={styles.fishUrduText}>(زندہ مچھلی)</Text>
+              <Text style={{ color: 'rgba(0, 0, 0, 0.8)' }}>
+                <Text style={styles.fishEngText}>{item.name} </Text>
+                <Text style={styles.fishUrduText}>({item.urduName})</Text>
               </Text>
               <Text style={styles.kg}>1kg</Text>
             </View>
@@ -127,7 +131,7 @@ const ItemDetailScreen = () => {
 
             <View style={styles.priceContainer}>
               <Text style={styles.priceText}>Price:</Text>
-              <Text style={{color: '#FD8D1F'}}>
+              <Text style={{ color: '#FD8D1F' }}>
                 <Text style={styles.priceNumberText}>650 </Text>
                 <Text style={styles.pricePkr}>PKR</Text>
               </Text>
@@ -161,7 +165,7 @@ const ItemDetailScreen = () => {
 
             <View style={styles.priceContainer}>
               <Text style={styles.priceText}>Subtotal:</Text>
-              <Text style={{color: '#FD8D1F'}}>
+              <Text style={{ color: '#FD8D1F' }}>
                 <Text style={styles.priceNumberText}>1300 </Text>
                 <Text style={styles.pricePkr}>PKR</Text>
               </Text>
@@ -187,7 +191,7 @@ const ItemDetailScreen = () => {
               </Text>
             </View>
 
-            <TouchableOpacity style={styles.addToCartContainer} onPress={()=> navigate.navigate('CartScreen')}>
+            <TouchableOpacity style={styles.addToCartContainer} onPress={() => navigate.navigate('CartScreen')}>
               <Text style={styles.addToCartText}>Add to Cart</Text>
             </TouchableOpacity>
           </View>

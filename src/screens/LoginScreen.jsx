@@ -11,9 +11,22 @@ import React from 'react';
 import FacebookIcon from '../assets/icons/Facebook.svg';
 import GoogleIcon from '../assets/icons/GoogleIcon.svg';
 import { useNavigation } from '@react-navigation/native';
+import { signInWithGoogle } from '../services/googleSignIn';
 
 const LoginScreen = () => {
-  const  navigate = useNavigation();
+
+  const navigate = useNavigation();
+
+  const googleLogin = async () => {
+    try {
+      console.log("googleLogin********* is working ");
+      
+      const user = await signInWithGoogle();
+      console.log('Logged in user:', user);
+    } catch (err) {
+      console.log("err*********", err);
+    }
+  }
   return (
     <SafeAreaView style={styles.safeareaContainer}>
       <StatusBar
@@ -32,7 +45,7 @@ const LoginScreen = () => {
         <Text style={styles.preferredLogin}>
           Choose your preferred login method to continue.
         </Text>
-        <TouchableOpacity style={styles.phoneNumberContinueButton} onPress={()=> navigate.navigate('EnterPhoneNumber')}>
+        <TouchableOpacity style={styles.phoneNumberContinueButton} onPress={() => navigate.navigate('EnterPhoneNumber')}>
           <Text style={styles.phoneNumberText}>Continue With Phone Number</Text>
         </TouchableOpacity>
 
@@ -41,7 +54,7 @@ const LoginScreen = () => {
           <Text style={styles.phoneNumberText}>Continue With Facebook</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.facebookButtonContainer}>
+        <TouchableOpacity style={styles.facebookButtonContainer} onPress={() => googleLogin()}>
           <GoogleIcon width={25} height={25} />
           <Text style={styles.phoneNumberText}>Continue With Google</Text>
         </TouchableOpacity>
