@@ -13,7 +13,7 @@ import TextInputLabel from '../components/TextInputLabel';
 import ProfilePicCamera from '../components/ProfilePicCamera';
 
 const EditProfileScreen = () => {
-  dasd
+  
   return (
     <SafeAreaView style={styles.safeareaContainer}>
       <StatusBar

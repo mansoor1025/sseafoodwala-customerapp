@@ -1,9 +1,10 @@
 import {StyleSheet, Text, View} from 'react-native';
+import 'react-native-gesture-handler';
 import React from 'react';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createStackNavigator } from '@react-navigation/stack';
 import AddToCartScreen from '../screens/AddToCartScreen';
 import CheckoutScreens from '../screens/CheckoutScreens';
-const Stack = createNativeStackNavigator();
+const Stack = createStackNavigator ();
 
 const CartStack = () => {
   return (

@@ -1,21 +1,34 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React, { useRef } from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {useNavigation, useNavigationState} from '@react-navigation/native';
+import { useNavigation, useNavigationState } from '@react-navigation/native';
 
-const Header = ({title, navigationScreen}) => {
-  const navigate = useNavigation();
-  const currentScreenName = useNavigationState(
-    state => state.routes[state.index].name
-  );
+const Header = ({ title, navigationScreen }) => {
+
+  const navigatingRef = useRef(false);
+  const navigation = useNavigation();
+  // const currentScreenName = useNavigationState(
+  //   state => state.routes[state.index].name
+  // );
   const goBackToPreviousScreen = () => {
-    navigate.goBack();
+    if (navigatingRef.current) return;
+
+    navigatingRef.current = true;
+
+    requestAnimationFrame(() => {
+      if (navigation.canGoBack()) {
+        navigation.goBack();
+      }
+    });
+
+    setTimeout(() => {
+      navigatingRef.current = false;
+    }, 600);
   };
-  
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        onPress={() => navigate.navigate(goBackToPreviousScreen())}>
+      <TouchableOpacity disabled={navigatingRef.current} onPress={() => goBackToPreviousScreen()}>
         <Ionicons name={'chevron-back'} size={30} />
       </TouchableOpacity>
 
@@ -35,7 +48,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#d3d3d3',
     backgroundColor: '#FFFFFF', // Required for shadow visibility
     shadowColor: '#000', // Shadow color
-    shadowOffset: {width: 0, height: 3}, // Shadow appears only at the bottom
+    shadowOffset: { width: 0, height: 3 }, // Shadow appears only at the bottom
     shadowOpacity: 0.1, // Adjust shadow transparency
     shadowRadius: 3, // Blur effect for shadow
     elevation: 4, // Required for Android shadow

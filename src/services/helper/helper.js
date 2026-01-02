@@ -16,7 +16,7 @@ export const getFetchData = async (url, setState = false, customerApiFlag) => {
     if (setState) {
       setState(response?.data?.data);
     }
-    
+
     return response?.data?.data
   } catch (error) {
     console.error('Error fetching users:', error);
@@ -24,7 +24,13 @@ export const getFetchData = async (url, setState = false, customerApiFlag) => {
 };
 
 export const imageUrlWrapper = url => {
-  console.log(`${BASE_URL}${url}`);
+  if (!url) return '';
 
+  // If full URL, return as is
+  if (url.startsWith('http://') || url.startsWith('https://')) {
+    return url;
+  }
+
+  // Otherwise add BASE_URL
   return `${BASE_URL}${url}`;
 };

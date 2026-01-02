@@ -1,7 +1,8 @@
+import 'react-native-gesture-handler';
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createStackNavigator } from '@react-navigation/stack';
 import SpashScreen from './src/screens/SpashScreen';
 import OfferIntroScreen from './src/screens/OfferIntroScreen';
 import LiveCuttingIntroScreen from './src/screens/LiveCuttingIntroScreen';
@@ -26,13 +27,13 @@ import ReferralEarn from './src/screens/ReferralEarnScreen';
 import ItemDetailScreen from './src/screens/ItemDetailScreen';
 import AddToCartScreen from './src/screens/AddToCartScreen';
 import CheckoutScreens from './src/screens/CheckoutScreens';
-const Stack = createNativeStackNavigator();
+const Stack = createStackNavigator();
 
 const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialState="ItemDetail"
+        initialRouteName="Splash"
         screenOptions={{headerShown: false, animation: 'slide_from_bottom'}}>
         <Stack.Screen name="Splash" component={SpashScreen} />
         <Stack.Screen name="OfferIntroScreen" component={OfferIntroScreen} />
@@ -41,11 +42,11 @@ const App = () => {
         <Stack.Screen name="BottomTab" component={BottomTab} />
 
         {/* Home screen routes */}
-        <Stack.Screen name="ProductList" component={ProductListScreen} />
-        <Stack.Screen name="ReferralEarn" component={ReferralEarn} />
-        <Stack.Screen name="ItemDetail" component={ItemDetailScreen} />
+        {/* <Stack.Screen name="ProductList" component={ProductListScreen} /> */}
+        {/* <Stack.Screen name="ReferralEarn" component={ReferralEarn} /> */}
+        {/* <Stack.Screen name="ItemDetail" component={ItemDetailScreen} /> */}
         <Stack.Screen name="CartScreen" component={AddToCartScreen} />
-        <Stack.Screen name="Checkout" component={CheckoutScreens} />
+        {/* <Stack.Screen name="Checkout" component={CheckoutScreens} /> */}
 
         <Stack.Screen name="Login" component={LoginScreen} />
 

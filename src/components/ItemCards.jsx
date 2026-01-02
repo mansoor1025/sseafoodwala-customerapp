@@ -6,14 +6,18 @@ import { useNavigation } from '@react-navigation/native';
 import { imageUrlWrapper } from '../services/helper/helper';
 
 const ItemCards = ({ item }) => {
+
+  const intialCount = item?.weight || 1
   const navigate = useNavigation();
-  const [count, setCount] = useState(5);
+  const [count, setCount] = useState(intialCount);
+  const [cartItem, setCartItem] = useState([]);
   const stars = [1, 2, 3, 4, 5];
+  const itemCarts = []
   // navigate.navigate('ProductList', { "productDetails": productData, "headerTitle": catName })
   return (
     <TouchableOpacity
       style={styles.itemCardContainer}
-      onPress={() => navigate.navigate('ItemDetail', { item })}>
+      onPress={() => navigate.navigate('ItemDetail', { item, itemCount: count })}>
       <View>
         <Image
           source={{
@@ -66,7 +70,7 @@ const ItemCards = ({ item }) => {
             <View style={styles.kgContainer}>
               <Text style={styles.kgTextStyle}>
                 <Text>{count} </Text>
-                <Text>Kg</Text>
+                <Text>{item?.unit || 'kg'}</Text>
               </Text>
             </View>
 
@@ -78,7 +82,7 @@ const ItemCards = ({ item }) => {
           </View>
         </View>
 
-        <TouchableOpacity style={styles.addToCardButton}>
+        <TouchableOpacity style={styles.addToCardButton} onPress={() => navigate.navigate('CartScreen', { item, itemCount: count })}>
           <Text style={styles.addToCartText}>Add to Cart</Text>
         </TouchableOpacity>
       </View>

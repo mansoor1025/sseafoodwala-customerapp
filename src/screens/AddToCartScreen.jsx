@@ -10,9 +10,12 @@ import {
 import React from 'react';
 import Header from '../components/Header';
 import CartContainer from '../components/CartContainer';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
-const AddToCartScreen = () => {
+const AddToCartScreen = ({ route }) => {
+  const { item } = route.params || {};
+  console.log("item*********",item);
+  
   const navigate = useNavigation();
   const totalCards = [
     {

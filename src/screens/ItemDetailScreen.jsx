@@ -19,16 +19,16 @@ import { useNavigation } from '@react-navigation/native';
 import { imageUrlWrapper } from '../services/helper/helper';
 
 const ItemDetailScreen = ({ route }) => {
-  const { item } = route.params || {};
-  console.log("item***********", item);
+  const { item, itemCount } = route.params || {};
+  console.log("unit***********", item?.unit);
 
   const stars = [1, 2, 3, 4, 5];
-  const [count, setCount] = useState(5);
+  const [count, setCount] = useState(itemCount);
   const [isOn, setIsOn] = useState(false);
   const itemCards = [
     {
       id: 100,
-      itemImage:
+      productImage:
         'https://res.cloudinary.com/dgiot0v7s/image/upload/v1734275575/vecteezy_fish-on-transparent-background_48718627_1_tvafow.png',
       fishEnglishName: 'Pomfret',
       fishUrduName: '(ٹانگہ )',
@@ -36,7 +36,7 @@ const ItemDetailScreen = ({ route }) => {
     },
     {
       id: 101,
-      itemImage:
+      productImage:
         'https://res.cloudinary.com/dgiot0v7s/image/upload/v1734275649/pngimg.com_-_fish_PNG25165_ioslhr.png',
       fishEnglishName: 'Hilsa',
       fishUrduName: '(پاپلا )',
@@ -44,7 +44,7 @@ const ItemDetailScreen = ({ route }) => {
     },
     {
       id: 103,
-      itemImage:
+      productImage:
         'https://res.cloudinary.com/dgiot0v7s/image/upload/v1734275839/vecteezy_fish-png-with-ai-generated_24705192_1_xry3jj.png',
       fishEnglishName: 'Tuna',
       fishUrduName: '( ٹونا)',
@@ -52,7 +52,7 @@ const ItemDetailScreen = ({ route }) => {
     },
     {
       id: 104,
-      itemImage:
+      productImage:
         'https://res.cloudinary.com/dgiot0v7s/image/upload/v1734275878/workimagethumb_o2zw6r.png',
       fishEnglishName: 'Tuna',
       fishUrduName: '( ٹونا)',
@@ -60,7 +60,7 @@ const ItemDetailScreen = ({ route }) => {
     },
     {
       id: 1410,
-      itemImage:
+      productImage:
         'https://res.cloudinary.com/dgiot0v7s/image/upload/v1734275575/vecteezy_fish-on-transparent-background_48718627_1_tvafow.png',
       fishEnglishName: 'Pomfret',
       fishUrduName: '(ٹانگہ )',
@@ -68,7 +68,7 @@ const ItemDetailScreen = ({ route }) => {
     },
     {
       id: 1015,
-      itemImage:
+      productImage:
         'https://res.cloudinary.com/dgiot0v7s/image/upload/v1734275649/pngimg.com_-_fish_PNG25165_ioslhr.png',
       fishEnglishName: 'Hilsa',
       fishUrduName: '(پاپلا )',
@@ -76,7 +76,7 @@ const ItemDetailScreen = ({ route }) => {
     },
     {
       id: 1030,
-      itemImage:
+      productImage:
         'https://res.cloudinary.com/dgiot0v7s/image/upload/v1734275839/vecteezy_fish-png-with-ai-generated_24705192_1_xry3jj.png',
       fishEnglishName: 'Tuna',
       fishUrduName: '( ٹونا)',
@@ -84,6 +84,7 @@ const ItemDetailScreen = ({ route }) => {
     },
   ];
   const navigate = useNavigation();
+  const subTotal = item.netPrice * count
 
   const handleToggle = () => {
     setIsOn(!isOn);
@@ -113,7 +114,7 @@ const ItemDetailScreen = ({ route }) => {
                 <Text style={styles.fishEngText}>{item.name} </Text>
                 <Text style={styles.fishUrduText}>({item.urduName})</Text>
               </Text>
-              <Text style={styles.kg}>1kg</Text>
+              <Text style={styles.kg}>{itemCount} {item?.unit || 'Kg'}</Text>
             </View>
 
             <View style={styles.ratingContainer}>
@@ -132,7 +133,7 @@ const ItemDetailScreen = ({ route }) => {
             <View style={styles.priceContainer}>
               <Text style={styles.priceText}>Price:</Text>
               <Text style={{ color: '#FD8D1F' }}>
-                <Text style={styles.priceNumberText}>650 </Text>
+                <Text style={styles.priceNumberText}>{item.netPrice} </Text>
                 <Text style={styles.pricePkr}>PKR</Text>
               </Text>
             </View>
@@ -166,7 +167,7 @@ const ItemDetailScreen = ({ route }) => {
             <View style={styles.priceContainer}>
               <Text style={styles.priceText}>Subtotal:</Text>
               <Text style={{ color: '#FD8D1F' }}>
-                <Text style={styles.priceNumberText}>1300 </Text>
+                <Text style={styles.priceNumberText}>{subTotal.toLocaleString()} </Text>
                 <Text style={styles.pricePkr}>PKR</Text>
               </Text>
             </View>
@@ -185,13 +186,11 @@ const ItemDetailScreen = ({ route }) => {
             <View style={styles.descriptionContainer}>
               <Text style={styles.descriptionText}>Description</Text>
               <Text style={styles.descriptionContent}>
-                Lorem Ipsum is simply dummy text of the printing and industry.
-                Lorem Ipsum has been the industry's standard dummy text everyone
-                since the 1500s.
+                {item.description}
               </Text>
             </View>
 
-            <TouchableOpacity style={styles.addToCartContainer} onPress={() => navigate.navigate('CartScreen')}>
+            <TouchableOpacity style={styles.addToCartContainer} onPress={() => navigate.navigate('Cart')}>
               <Text style={styles.addToCartText}>Add to Cart</Text>
             </TouchableOpacity>
           </View>
