@@ -16,7 +16,7 @@ import { useAuthStore } from "../store/useAuthStore";
 
 const OtpVerificationScreen = ({ route }) => {
   const inputRefs = useRef([]);
-  const { formattedNumber } = route.params || "";
+  const { formattedNumber, loginBackScreen } = route.params || "";
   const navigate = useNavigation();
   const inputArr = [1, 2, 3, 4];
   const [otp, setOtp] = useState(["", "", "", ""]);
@@ -32,10 +32,10 @@ const OtpVerificationScreen = ({ route }) => {
       console.log("function is working *****");
 
       const finalOtp = otp.join("");
-      const response = await customerApiService.post('/verifyOtp', { phonenumber: formattedNumber, otp: parseInt(finalOtp) });
+      const response = await customerApiService.post('/users/verifyOtp', { phonenumber: formattedNumber, otp: parseInt(finalOtp) });
       console.log("response******", response?.data?.data);
-      login(response?.data?.data?.token, response?.data?.data?.userObj);
-      navigate.navigate("ReferralEarn")
+      login(response?.data?.data?.token, response?.data?.data?.userObj, loginBackScreen);
+      navigate.navigate(loginBackScreen)
     } catch (error) {
       console.log("error?((((((", error);
 

@@ -13,14 +13,14 @@ import GoogleIcon from '../assets/icons/GoogleIcon.svg';
 import { useNavigation } from '@react-navigation/native';
 import { signInWithGoogle } from '../services/googleSignIn';
 
-const LoginScreen = () => {
+const LoginScreen = ({ route }) => {
 
   const navigate = useNavigation();
-
+  const { loginBackScreen } = route.params || "";
   const googleLogin = async () => {
     try {
       console.log("googleLogin********* is working ");
-      
+
       const user = await signInWithGoogle();
       console.log('Logged in user:', user);
     } catch (err) {
@@ -45,7 +45,7 @@ const LoginScreen = () => {
         <Text style={styles.preferredLogin}>
           Choose your preferred login method to continue.
         </Text>
-        <TouchableOpacity style={styles.phoneNumberContinueButton} onPress={() => navigate.navigate('EnterPhoneNumber')}>
+        <TouchableOpacity style={styles.phoneNumberContinueButton} onPress={() => navigate.navigate('EnterPhoneNumber', { loginBackScreen })}>
           <Text style={styles.phoneNumberText}>Continue With Phone Number</Text>
         </TouchableOpacity>
 

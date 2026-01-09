@@ -7,17 +7,19 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
+  Alert
 } from 'react-native';
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { customerApiService } from '../services/customerApiService';
 
-const EnterPhoneNumberScreen = () => {
+const EnterPhoneNumberScreen = ({ route }) => {
   const [phonenumber, setPhonenumber] = useState("")
   const [phonenumberError, setPhonenumberError] = useState(null)
   const [countdown, setCountdown] = useState(0);
   const intervalRef = useRef(null);
   const [isDisabled, setIsDisabled] = useState(false);
+  const { loginBackScreen } = route.params || "";
 
   useEffect(() => {
     return () => {
@@ -59,17 +61,17 @@ const EnterPhoneNumberScreen = () => {
       // Validate length
       if (formattedNumber.length !== 10) {
         setPhonenumberError("Number must be 10 digits");
-        return;
+        return
       }
 
       // Add country code if needed (for Pakistan +92)
       formattedNumber = "92" + formattedNumber;
       console.log("Formatted number:", formattedNumber);
 
-      const response = await customerApiService.post('/sentOtp', { phonenumber: formattedNumber });
+      const response = await customerApiService.post('/users/sentOtp', { phonenumber: formattedNumber });
       console.log("response******", response?.data);
 
-      navigate.navigate('OtpVerification', { formattedNumber })
+      navigate.navigate('OtpVerification', { formattedNumber,loginBackScreen })
     } catch (error) {
       setPhonenumberError(error?.response?.data?.message)
       startCountdown()
@@ -78,10 +80,24 @@ const EnterPhoneNumberScreen = () => {
       setTimeout(() => {
         setIsDisabled(false);
       }, 300000); // 5 minutes
-      console.log("error ***********", error?.response?.data?.message);
+      let message = 'Something went wrong';
+
+      if (error.response) {
+        // Backend responded with error
+        if (error.response.data?.message) {
+          message = error.response.data.message;
+        } else if (
+          Array.isArray(error.response.data?.errors) &&
+          error.response.data.errors.length > 0
+        ) {
+          message = error.response.data.errors[0].msg;
+        }
+      }
+
+      Alert.alert('Error', message);
     }
   }
-  
+
   return (
     <SafeAreaView style={styles.safeareaContainer}>
       <StatusBar

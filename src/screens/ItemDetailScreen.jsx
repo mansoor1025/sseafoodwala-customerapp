@@ -16,15 +16,18 @@ import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import ToggleSwitch from 'toggle-switch-react-native';
 import ItemCards from '../components/ItemCards';
 import { useNavigation } from '@react-navigation/native';
-import { imageUrlWrapper } from '../services/helper/helper';
+import { addToCart, imageUrlWrapper } from '../services/helper/helper';
+import { useAuthStore } from '../store/useAuthStore';
 
 const ItemDetailScreen = ({ route }) => {
+  const user = useAuthStore((s) => s.user);
+
   const { item, itemCount } = route.params || {};
   console.log("unit***********", item?.unit);
 
   const stars = [1, 2, 3, 4, 5];
   const [count, setCount] = useState(itemCount);
-  const [isOn, setIsOn] = useState(false);
+  const [isOn, setIsOn] = useState(true);
   const itemCards = [
     {
       id: 100,
@@ -84,10 +87,12 @@ const ItemDetailScreen = ({ route }) => {
     },
   ];
   const navigate = useNavigation();
-  const subTotal = item.netPrice * count
+  const subTotal = item.price * count
 
   const handleToggle = () => {
     setIsOn(!isOn);
+    console.log("isOn******",isOn);
+    
   };
   return (
     <SafeAreaView style={styles.safeareaContainer}>
@@ -133,7 +138,7 @@ const ItemDetailScreen = ({ route }) => {
             <View style={styles.priceContainer}>
               <Text style={styles.priceText}>Price:</Text>
               <Text style={{ color: '#FD8D1F' }}>
-                <Text style={styles.priceNumberText}>{item.netPrice} </Text>
+                <Text style={styles.priceNumberText}>{item.price} </Text>
                 <Text style={styles.pricePkr}>PKR</Text>
               </Text>
             </View>
@@ -190,7 +195,7 @@ const ItemDetailScreen = ({ route }) => {
               </Text>
             </View>
 
-            <TouchableOpacity style={styles.addToCartContainer} onPress={() => navigate.navigate('Cart')}>
+            <TouchableOpacity style={styles.addToCartContainer} onPress={() => addToCart(item, user, count, navigate, isOn, "ItemDetail")}>
               <Text style={styles.addToCartText}>Add to Cart</Text>
             </TouchableOpacity>
           </View>

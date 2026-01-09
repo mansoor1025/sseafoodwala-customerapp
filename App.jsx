@@ -27,9 +27,13 @@ import ReferralEarn from './src/screens/ReferralEarnScreen';
 import ItemDetailScreen from './src/screens/ItemDetailScreen';
 import AddToCartScreen from './src/screens/AddToCartScreen';
 import CheckoutScreens from './src/screens/CheckoutScreens';
+import { useAuthStore } from './src/store/useAuthStore';
 const Stack = createStackNavigator();
 
+
 const App = () => {
+  const loadSession = useAuthStore((s) => s.loadSession);
+  loadSession()
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -40,10 +44,10 @@ const App = () => {
         <Stack.Screen name="FastDelivery" component={FastDeliveryIntroScreen} />
         <Stack.Screen name="LiveCutting" component={LiveCuttingIntroScreen} />
         <Stack.Screen name="BottomTab" component={BottomTab} />
-
+        
         {/* Home screen routes */}
         {/* <Stack.Screen name="ProductList" component={ProductListScreen} /> */}
-        {/* <Stack.Screen name="ReferralEarn" component={ReferralEarn} /> */}
+        <Stack.Screen name="ReferralEarn" component={ReferralEarn} />
         {/* <Stack.Screen name="ItemDetail" component={ItemDetailScreen} /> */}
         <Stack.Screen name="CartScreen" component={AddToCartScreen} />
         {/* <Stack.Screen name="Checkout" component={CheckoutScreens} /> */}
