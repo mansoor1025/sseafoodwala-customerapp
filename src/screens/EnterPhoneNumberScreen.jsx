@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { customerApiService } from '../services/customerApiService';
+import { customerApiService } from '../api/customerApiService';
 
 const EnterPhoneNumberScreen = ({ route }) => {
   const [phonenumber, setPhonenumber] = useState("")
@@ -20,7 +20,7 @@ const EnterPhoneNumberScreen = ({ route }) => {
   const intervalRef = useRef(null);
   const [isDisabled, setIsDisabled] = useState(false);
   const { loginBackScreen } = route.params || "";
-
+ 
   useEffect(() => {
     return () => {
       if (intervalRef.current) {

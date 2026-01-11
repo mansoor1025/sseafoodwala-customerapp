@@ -4,20 +4,18 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import { useNavigation } from '@react-navigation/native';
 import { addToCart, imageUrlWrapper } from '../services/helper/helper';
-import { customerApiService } from '../services/customerApiService';
+import { customerApiService } from '../api/customerApiService';
 import { useAuthStore } from '../store/useAuthStore';
+import { useSelector, useDispatch } from 'react-redux';
+import { useAddToCart } from '../hooks/useAddToCart';
 
 const ItemCards = ({ item }) => {
+  const { handleAddToCart } = useAddToCart();
   const intialCount = item?.weight || 1
   const navigate = useNavigation();
   const [count, setCount] = useState(intialCount);
-  const [cartItem, setCartItem] = useState([]);
   const stars = [1, 2, 3, 4, 5];
-  const itemCarts = []
-  const user = useAuthStore((s) => s.user);
-
-
-  // navigate.navigate('ProductList', { "productDetails": productData, "headerTitle": catName })
+  
   return (
     <TouchableOpacity
       style={styles.itemCardContainer}
@@ -86,7 +84,7 @@ const ItemCards = ({ item }) => {
           </View>
         </View>
 
-        <TouchableOpacity style={styles.addToCardButton} onPress={() => addToCart(item, user, count, navigate, 0, 'BottomTab')}>
+        <TouchableOpacity style={styles.addToCardButton} onPress={() => handleAddToCart(item, count, 0, 'BottomTab')}>
           <Text style={styles.addToCartText}>Add to Cart</Text>
         </TouchableOpacity>
       </View>

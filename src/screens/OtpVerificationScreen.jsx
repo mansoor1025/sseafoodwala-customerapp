@@ -11,7 +11,7 @@ import {
 import React, { useEffect, useRef, useState } from 'react';
 import PencilIcon from '../assets/icons/PencilIcon.svg';
 import { useNavigation } from '@react-navigation/native';
-import { customerApiService } from '../services/customerApiService';
+import { customerApiService } from '../api/customerApiService';
 import { useAuthStore } from "../store/useAuthStore";
 
 const OtpVerificationScreen = ({ route }) => {
@@ -29,33 +29,21 @@ const OtpVerificationScreen = ({ route }) => {
 
   const verifyOtp = async () => {
     try {
-      console.log("function is working *****");
-
       const finalOtp = otp.join("");
       const response = await customerApiService.post('/users/verifyOtp', { phonenumber: formattedNumber, otp: parseInt(finalOtp) });
-      console.log("response******", response?.data?.data);
       login(response?.data?.data?.token, response?.data?.data?.userObj, loginBackScreen);
       navigate.navigate(loginBackScreen)
     } catch (error) {
-      console.log("error?((((((", error);
-
-      console.log("error********", error?.response?.data?.message);
-
       if (error?.response?.data?.message) {
         setotpException(true)
       }
-
     }
-
   }
 
   const resendOtp = async () => {
     try {
       const response = await customerApiService.post('/sentOtp', { phonenumber: formattedNumber });
-      console.log("response******", response?.data);
-
     } catch (error) {
-      console.log("error********", error?.response?.data?.message);
       startCountdown()
       setPhonenumberError(error?.response?.data?.message)
       setIsDisabled(true);
