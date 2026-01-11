@@ -18,13 +18,13 @@ import ItemCards from '../components/ItemCards';
 import { useNavigation } from '@react-navigation/native';
 import { addToCart, imageUrlWrapper } from '../services/helper/helper';
 import { useAuthStore } from '../store/useAuthStore';
+import { useAddToCart } from '../hooks/useAddToCart';
 
 const ItemDetailScreen = ({ route }) => {
   const user = useAuthStore((s) => s.user);
+  const { handleAddToCart } = useAddToCart();
 
   const { item, itemCount } = route.params || {};
-  console.log("unit***********", item?.unit);
-
   const stars = [1, 2, 3, 4, 5];
   const [count, setCount] = useState(itemCount);
   const [isOn, setIsOn] = useState(true);
@@ -86,13 +86,10 @@ const ItemDetailScreen = ({ route }) => {
       price: 900,
     },
   ];
-  const navigate = useNavigation();
   const subTotal = item.price * count
 
   const handleToggle = () => {
     setIsOn(!isOn);
-    console.log("isOn******",isOn);
-    
   };
   return (
     <SafeAreaView style={styles.safeareaContainer}>
@@ -195,7 +192,7 @@ const ItemDetailScreen = ({ route }) => {
               </Text>
             </View>
 
-            <TouchableOpacity style={styles.addToCartContainer} onPress={() => addToCart(item, user, count, navigate, isOn, "ItemDetail")}>
+            <TouchableOpacity style={styles.addToCartContainer} onPress={() => handleAddToCart(item, count, 0, 'ItemDetail')} >
               <Text style={styles.addToCartText}>Add to Cart</Text>
             </TouchableOpacity>
           </View>
