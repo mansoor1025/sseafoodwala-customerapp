@@ -3,10 +3,7 @@ import React, { useState } from 'react';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import { useNavigation } from '@react-navigation/native';
-import { addToCart, imageUrlWrapper } from '../services/helper/helper';
-import { customerApiService } from '../api/customerApiService';
-import { useAuthStore } from '../store/useAuthStore';
-import { useSelector, useDispatch } from 'react-redux';
+import { imageUrlWrapper } from '../services/helper/helper';
 import { useAddToCart } from '../hooks/useAddToCart';
 
 const ItemCards = ({ item }) => {
@@ -15,7 +12,7 @@ const ItemCards = ({ item }) => {
   const navigate = useNavigation();
   const [count, setCount] = useState(intialCount);
   const stars = [1, 2, 3, 4, 5];
-  
+
   return (
     <TouchableOpacity
       style={styles.itemCardContainer}

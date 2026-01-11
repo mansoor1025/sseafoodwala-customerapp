@@ -25,6 +25,8 @@ import AddToCartScreen from '../src/screens/AddToCartScreen';
 import { useAuthStore } from '../src/store/useAuthStore';
 import { useDispatch } from 'react-redux';
 import { fetchCartThunk } from '../src/store/cartThunk';
+import Toast from 'react-native-toast-message';
+
 const Stack = createStackNavigator();
 
 
@@ -106,6 +108,7 @@ const AppNavigator = () => {
 
                 <Stack.Screen name="SelectCity" component={SelectCityScreen} />
             </Stack.Navigator>
+            <Toast />
         </NavigationContainer>
     );
 };
