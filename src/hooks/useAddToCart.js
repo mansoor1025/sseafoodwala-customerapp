@@ -8,7 +8,9 @@ import Toast from 'react-native-toast-message';
 export const useAddToCart = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const user = useAuthStore(state => state.user);
+  const state = useAuthStore(state => state);
+  const { user } = state
+  // console.log("state******", state);
 
   const handleAddToCart = async (item, count, isLiveCutting, loginBackScreen) => {
     if (!user) {
@@ -31,8 +33,8 @@ export const useAddToCart = () => {
 
       Toast.show({
         type: 'error',
-        text1: 'Something went wrong',
-        text2: err?.message || 'Please try again',
+        text1: err || 'Please try again',
+        text2: err || 'Please try again',
       });
 
     }

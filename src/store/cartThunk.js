@@ -2,10 +2,14 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { addToCartApi, getCartApi } from '../api/cart.api';
 import { setCart } from './cartSlice';
 
+
+
 export const addToCartThunk = createAsyncThunk(
   'cart/addToCart',
   async ({ item, user, count, isLiveCutting }, { dispatch, rejectWithValue }) => {
+
     try {
+      
       const userData = typeof user === 'string' ? JSON.parse(user) : user;
       isLiveCutting = typeof isLiveCutting === 'boolean' && isLiveCutting === true ? 1 : 0
 
@@ -42,9 +46,9 @@ export const fetchCartThunk = createAsyncThunk(
   'cart/getItemByUserId',
   async ({ userId }, { dispatch, rejectWithValue }) => {
     try {
-      const response = await getCartApi({userId});
+      const response = await getCartApi({ userId });
       const cartData = response.data.data;
-      
+    
       dispatch(
         setCart({
           items: cartData.items,
@@ -55,6 +59,8 @@ export const fetchCartThunk = createAsyncThunk(
 
       return cartData;
     } catch (err) {
+      console.log("cart api err*****",err);
+      
       return rejectWithValue(
         err.response?.data?.message || 'Failed to fetch cart'
       );

@@ -34,7 +34,7 @@ const AppNavigator = () => {
     const dispatch = useDispatch();
     const loadSession = useAuthStore(s => s.loadSession);
     const user = useAuthStore(s => s.user);
-
+    
     useEffect(() => {
         loadSession();
     }, []);
@@ -42,9 +42,8 @@ const AppNavigator = () => {
     // 🔹 Fetch cart when user becomes available
     useEffect(() => {
         if (!user) return;
-
         const parsedUser = typeof user === 'string' ? JSON.parse(user) : user;
-
+        
         if (parsedUser?.id) {
             dispatch(fetchCartThunk({ userId: parsedUser.id }));
         }

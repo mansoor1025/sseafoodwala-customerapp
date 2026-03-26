@@ -13,6 +13,7 @@ import PencilIcon from '../assets/icons/PencilIcon.svg';
 import { useNavigation } from '@react-navigation/native';
 import { customerApiService } from '../api/customerApiService';
 import { useAuthStore } from "../store/useAuthStore";
+import Toast from 'react-native-toast-message';
 
 const OtpVerificationScreen = ({ route }) => {
   const inputRefs = useRef([]);
@@ -31,9 +32,14 @@ const OtpVerificationScreen = ({ route }) => {
     try {
       const finalOtp = otp.join("");
       const response = await customerApiService.post('/users/verifyOtp', { phonenumber: formattedNumber, otp: parseInt(finalOtp) });
-      login(response?.data?.data?.token, response?.data?.data?.userObj, loginBackScreen);
+      login(response?.data?.data?.accessToken, response?.data?.data?.userObj, response?.data?.data?.refreshToken);
       navigate.navigate(loginBackScreen)
     } catch (error) {
+      Toast.show({
+        type: 'error',
+        text1: error?.response?.data?.message || 'Please try again',
+        text2: error?.response?.data?.message || 'Please try again',
+      });
       if (error?.response?.data?.message) {
         setotpException(true)
       }
