@@ -7,16 +7,21 @@ import {
   FlatList,
   TouchableOpacity,
 } from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import CartContainer from '../components/CartContainer';
 import { useNavigation } from '@react-navigation/native';
+import { getFetchData } from '../services/helper/helper';
 
 const AddToCartScreen = ({ route }) => {
   const { item } = route.params || {};
-  console.log("item*********",item);
-  
+  const [cartList, setCartList] = useState([]);
+  console.log("item*********", item);
+
   const navigate = useNavigation();
+  useEffect(() => {
+    getFetchData('cart/getItemByUserId', setCartList, true);
+  }, []);
   const totalCards = [
     {
       id: 1,
