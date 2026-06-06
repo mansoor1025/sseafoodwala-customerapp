@@ -1,4 +1,4 @@
-import { customerApiService } from './client';
+import { customerApiService } from '../client';
 
 export const addToCartApi = (data) => {
   return customerApiService.post('/cart/addToCart', data);

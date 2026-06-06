@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {BASE_URL} from '@env';
-console.log("BASE_URL*******",BASE_URL);
+// console.log("BASE_URL*******",BASE_URL);
 
 export const adminApi = axios.create({
   baseURL: `${BASE_URL}/admin/api`, // Replace with your actual API base URL

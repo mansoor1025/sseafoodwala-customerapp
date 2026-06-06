@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+  userData: {},
   items: [],
   totalCount: 0,
   totalPrice: 0,

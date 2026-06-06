@@ -5,16 +5,18 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import DropDownIcon from '../assets/icons/DropDownIcon.svg';
 import SelectCityModal from './SelectCityModal';
-import {adminApi} from '../services/adminApiService';
+import { adminApi } from '../services/adminApiService';
+import { useUserProfile } from '../hooks/useUserProfile';
 
-const InputSearchCategory = ({city}) => {
+const InputSearchCategory = ({ city }) => {
   const [cities, setCities] = useState();
   const [selectCity, setSelectedCity] = useState(city);
   const [isModalVisible, setModalVisible] = useState(false);
+  const { handleUpdateUserProfile } = useUserProfile();
 
   const fetchCities = async () => {
     try {
@@ -62,6 +64,7 @@ const InputSearchCategory = ({city}) => {
         isModalVisible={isModalVisible}
         setModalVisible={setModalVisible}
         setSelectedCity={setSelectedCity}
+        handleUpdateUserProfile={handleUpdateUserProfile}
         cities={cities}
       />
     </View>
@@ -92,7 +95,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
   },
 
-  inputOtherContent: {flex: 1, flexDirection: 'row', alignItems: 'center'},
+  inputOtherContent: { flex: 1, flexDirection: 'row', alignItems: 'center' },
 
   divider: {
     borderColor: 'rgba(7, 66, 122, 0.8)',

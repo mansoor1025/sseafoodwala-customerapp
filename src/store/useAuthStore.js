@@ -29,6 +29,10 @@ export const useAuthStore = create((set, get) => ({
 
     // After login
     login: async (token, user, refreshToken) => {
+        console.log("token*****",token);
+        console.log("user*****",user);
+        console.log("refreshToken*****",refreshToken);
+    
         const deviceId = await DeviceInfo.getUniqueId();
         console.log("deviceId******", deviceId);
 

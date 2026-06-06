@@ -10,12 +10,13 @@ import CheckoutScreens from '../screens/CheckoutScreens';
 
 const Stack = createStackNavigator();
 
-const HomeStack = () => {
+const HomeStack = ({ route }) => {
+  const { city } = route.params || {};
   return (
     <Stack.Navigator
       screenOptions={{ headerShown: false, animation: 'slide_from_bottom' }}
       initialRouteName="Home">
-      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Home" component={HomeScreen} initialParams={{ city }} />
       <Stack.Screen name="ReferralEarn" component={ReferralEarn} />
       <Stack.Screen name="ProductList" component={ProductListScreen} />
       <Stack.Screen name="ItemDetail" component={ItemDetailScreen} />

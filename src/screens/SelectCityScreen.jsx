@@ -14,12 +14,15 @@ import RNPickerSelect from 'react-native-picker-select';
 import AntDesign from 'react-native-vector-icons/dist/AntDesign';
 import { useNavigation } from '@react-navigation/native';
 import { adminApi } from '../services/adminApiService';
+import { useUserProfile } from '../hooks/useUserProfile';
+
 
 const SelectCityScreen = () => {
   const [selectedCity, setSelectedCity] = useState(null);
   const [cities, setCities] = useState([]);
   const [cityValidation, setCityValidation] = useState(false);
   const navigate = useNavigation();
+  const { handleUpdateUserProfile } = useUserProfile();
 
   const fetchCities = async () => {
     try {
@@ -47,18 +50,20 @@ const SelectCityScreen = () => {
         },
         buttonIndex => {
           if (buttonIndex > 0) {
-            const cityValue = 
-            setSelectedCity(cities[buttonIndex - 1].label);
+            const cityValue =
+              setSelectedCity(cities[buttonIndex - 1].label);
           }
         }
-      ); 
+      );
     }
   };
 
-  const homeContinue = (flag = false) => {
+  const homeContinue = async (flag = false) => {
     if (selectedCity) {
       setCityValidation(false);
-      flag && navigate.navigate('BottomTab', { city: selectedCity });
+      const cityOnly = selectedCity.split(' ')[0];
+      flag && navigate.navigate('BottomTab', { city: cityOnly });
+      await handleUpdateUserProfile({ city: cityOnly })
     } else {
       setCityValidation(true);
     }

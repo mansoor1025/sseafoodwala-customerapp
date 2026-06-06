@@ -23,9 +23,12 @@ import TrackOrderScreen from '../src/screens/TrackOrderScreen';
 import ReferralEarn from '../src/screens/ReferralEarnScreen';
 import AddToCartScreen from '../src/screens/AddToCartScreen';
 import { useAuthStore } from '../src/store/useAuthStore';
-import { useDispatch } from 'react-redux';
-import { fetchCartThunk } from '../src/store/cartThunk';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchCartThunk } from './store/cart/cartThunk';
 import Toast from 'react-native-toast-message';
+import { fetchUserProfileThunk } from './store/userProfile/userProfileThunk';
+import { USER_TYPES } from './constants/user.constants';
+import { getUserProfileState } from './store/userProfile/userProfileSlice';
 
 const Stack = createStackNavigator();
 
@@ -34,30 +37,46 @@ const AppNavigator = () => {
     const dispatch = useDispatch();
     const loadSession = useAuthStore(s => s.loadSession);
     const user = useAuthStore(s => s.user);
-    
+    const userProfile = useSelector((state) => state.userProfile);
+
     useEffect(() => {
         loadSession();
     }, []);
 
+    useEffect(() => {
+        const userType = !user ? USER_TYPES.GUEST : USER_TYPES.LOGGEDIN
+        dispatch(fetchUserProfileThunk({ userType }))
+    }, [user]);
     // 🔹 Fetch cart when user becomes available
     useEffect(() => {
         if (!user) return;
         const parsedUser = typeof user === 'string' ? JSON.parse(user) : user;
-        
+
         if (parsedUser?.id) {
             dispatch(fetchCartThunk({ userId: parsedUser.id }));
         }
     }, [user]);
 
+    if (userProfile?.isLoaded) {
+        return null; // or a <LoadingSpinner /> component
+    }
+    // console.log("userProfile*************", userProfile);
+    const initialRoute = userProfile?.isFirstTimeUser ? "Splash" : "BottomTab";
+    // console.log("initialRoute***x****", initialRoute);
+
     return (
         <NavigationContainer>
             <Stack.Navigator
-                initialRouteName="Splash"
+                initialRouteName={initialRoute}
                 screenOptions={{ headerShown: false, animation: 'slide_from_bottom' }}>
+
+
                 <Stack.Screen name="Splash" component={SpashScreen} />
                 <Stack.Screen name="OfferIntroScreen" component={OfferIntroScreen} />
                 <Stack.Screen name="FastDelivery" component={FastDeliveryIntroScreen} />
                 <Stack.Screen name="LiveCutting" component={LiveCuttingIntroScreen} />
+
+
                 <Stack.Screen name="BottomTab" component={BottomTab} />
 
                 {/* Home screen routes */}

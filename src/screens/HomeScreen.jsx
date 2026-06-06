@@ -6,18 +6,20 @@ import {
   View,
   ScrollView,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import HomeHeader from '../components/HomeHeader';
 import InputSearchCategory from '../components/InputSearchCategory';
 import Banner from '../components/Banner';
 import EarnRewards from '../components/EarnRewards';
 import CategoriesListing from '../components/CategoriesListing';
 import ProductListing from '../components/ProductListing';
-import {getFetchData} from '../services/helper/helper';
+import { getFetchData } from '../services/helper/helper';
+import { useSelector } from 'react-redux';
 
-const HomeScreen = ({route}) => {
-  const {city} = route.params || {};
+const HomeScreen = ({ route }) => {
 
+  const userProfile = useSelector((state) => state.userProfile);
+  const city = userProfile?.userData?.city
   const [categoriesList, setCategoriesList] = useState([]);
   const [bannersList, setbannersList] = useState([]);
   const [sectionList, setSectionList] = useState([]);

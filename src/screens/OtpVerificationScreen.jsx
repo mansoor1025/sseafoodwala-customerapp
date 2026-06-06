@@ -27,13 +27,16 @@ const OtpVerificationScreen = ({ route }) => {
   const [isDisabled, setIsDisabled] = useState(false);
   const [phonenumberError, setPhonenumberError] = useState(null)
   const login = useAuthStore((s) => s.login);
+  console.log("loginBackScreen******", loginBackScreen);
 
   const verifyOtp = async () => {
     try {
       const finalOtp = otp.join("");
       const response = await customerApiService.post('/users/verifyOtp', { phonenumber: formattedNumber, otp: parseInt(finalOtp) });
-      login(response?.data?.data?.accessToken, response?.data?.data?.userObj, response?.data?.data?.refreshToken);
-      navigate.navigate(loginBackScreen)
+      await login(response?.data?.data?.accessToken, response?.data?.data?.userObj, response?.data?.data?.refreshToken);
+      console.log("loginBackScreen******", loginBackScreen);
+
+      navigate.navigate(loginBackScreen ?? 'BottomTab')
     } catch (error) {
       Toast.show({
         type: 'error',

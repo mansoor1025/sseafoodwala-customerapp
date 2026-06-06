@@ -1,14 +1,15 @@
-import {StyleSheet, Modal, Dimensions, Text, View} from 'react-native';
+import { StyleSheet, Modal, Dimensions, Text, View } from 'react-native';
 import React from 'react';
-const {width, height} = Dimensions.get('window');
-import {BlurView} from '@react-native-community/blur';
-import {SelectList} from 'react-native-dropdown-select-list';
+const { width, height } = Dimensions.get('window');
+import { BlurView } from '@react-native-community/blur';
+import { SelectList } from 'react-native-dropdown-select-list';
 
 const SelectCityModal = ({
   isModalVisible,
   setModalVisible,
   setSelectedCity,
   cities,
+  handleUpdateUserProfile
 }) => {
   return (
     <Modal
@@ -29,14 +30,15 @@ const SelectCityModal = ({
             setSelected={val => {
               setSelectedCity(val);
               setModalVisible(false);
+              handleUpdateUserProfile({ city: val })
             }}
             data={
               cities?.length
                 ? cities.map(city => ({
-                    key: city.value, // keep id as key (for uniqueness)
-                    value: city.label, // 👈 SelectList will now return the label
-                  }))
-                : [{key: 0, value: 'No cities available'}]
+                  key: city.value, // keep id as key (for uniqueness)
+                  value: city.label, // 👈 SelectList will now return the label
+                }))
+                : [{ key: 0, value: 'No cities available' }]
             }
             placeholder="Select City"
             boxStyles={styles.selectCity}
@@ -69,7 +71,7 @@ const styles = StyleSheet.create({
     padding: 20,
     alignItems: 'center',
     shadowColor: '#000',
-    shadowOffset: {width: 0, height: 2},
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 5,

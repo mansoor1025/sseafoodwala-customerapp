@@ -1,7 +1,7 @@
 import { Alert } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
-import { addToCartThunk } from '../store/cartThunk';
+import { addToCartThunk } from '../store/cart/cartThunk';
 import { useAuthStore } from '../store/useAuthStore';
 import Toast from 'react-native-toast-message';
 
